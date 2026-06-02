@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import argparse
+import os
 import shutil
+import sys
 import tempfile
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -19,9 +21,20 @@ DEFAULT_REPORTS_ROOT = PROJECT_ROOT / "reports"
 DEFAULT_CONFIG_PATH = PROJECT_ROOT / "config" / "rules.yaml"
 DEFAULT_BUDGET_PATH = PROJECT_ROOT / "config" / "budget.yaml"
 DEFAULT_MERCHANT_MAP_PATH = PROJECT_ROOT / "config" / "merchant_map.yaml"
+README_SETUP_REFERENCE = f"See {PROJECT_ROOT / 'README.md'} Quick Start."
+LUNCHMONEY_ACCESS_TOKEN_PLACEHOLDERS = {
+    "replace_with_your_lunch_money_access_token",
+    "your_lunch_money_access_token",
+    "replace_me",
+    "changeme",
+}
 
 
-def main() -> None:
+class ConfigurationValidationError(ValueError):
+    """Raised when required local configuration is missing."""
+
+
+def main() -> int:
     parser = argparse.ArgumentParser(description="Local-first Lunch Money finance watcher")
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG_PATH)
     parser.add_argument("--budget", type=Path, default=DEFAULT_BUDGET_PATH)
@@ -90,6 +103,12 @@ def main() -> None:
     impact_parser.add_argument("--date", type=_parse_date, default=date.today())
 
     args = parser.parse_args()
+    try:
+        _validate_startup_configuration(args)
+    except ConfigurationValidationError as exc:
+        print(exc, file=sys.stderr)
+        return 2
+
     config = rules.load_rules(args.config)
     budget_config = alarms.load_budget_config(args.budget)
 
@@ -228,6 +247,44 @@ def main() -> None:
             args.merchant_map,
         )
         print(f"Purchase impact written to {path}")
+
+    return 0
+
+
+def _validate_startup_configuration(args: argparse.Namespace) -> None:
+    if not _command_requires_lunchmoney_token(args):
+        return
+
+    missing: list[str] = []
+    invalid: list[str] = []
+    token = os.environ.get("LUNCHMONEY_ACCESS_TOKEN", "").strip()
+    if not token:
+        missing.append("LUNCHMONEY_ACCESS_TOKEN")
+    elif token.lower() in LUNCHMONEY_ACCESS_TOKEN_PLACEHOLDERS:
+        invalid.append("LUNCHMONEY_ACCESS_TOKEN")
+
+    if not missing and not invalid:
+        return
+
+    lines = ["Lunch Money setup is incomplete."]
+    if missing:
+        lines.append(f"Missing required environment variable(s): {', '.join(missing)}.")
+    if invalid:
+        lines.append(f"Invalid placeholder value for: {', '.join(invalid)}.")
+    lines.extend(
+        [
+            "Export a real Lunch Money access token before running commands that pull live data.",
+            "Example: export LUNCHMONEY_ACCESS_TOKEN=your_real_token",
+            README_SETUP_REFERENCE,
+        ]
+    )
+    raise ConfigurationValidationError("\n".join(lines))
+
+
+def _command_requires_lunchmoney_token(args: argparse.Namespace) -> bool:
+    if args.command in {"pull", "run-all", "monitor"}:
+        return True
+    return args.command == "weekly-email" and not bool(getattr(args, "no_pull", False))
 
 
 def pull(
@@ -384,4 +441,4 @@ def _month_end(day: date) -> date:
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
