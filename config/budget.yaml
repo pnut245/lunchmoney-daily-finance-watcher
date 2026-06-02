@@ -1,0 +1,257 @@
+# Local budget and weekly review policy.
+#
+# This file does not write anything back to Lunch Money. It is a local overlay
+# used to prepare a calm Sunday budgeting brief and notify only for urgent items.
+
+budget:
+  currency: usd
+  period: monthly
+
+  # Set this once Patrick decides the target cash buffer. If account_names is
+  # empty, all active cash/depository accounts in the local account cache count.
+  cash_buffer:
+    enabled: false
+    minimum_balance: null
+    account_names: []
+
+  # Set this later if the watcher should flag months that are not preserving
+  # enough cash after income and outflows.
+  monthly_savings_target:
+    enabled: false
+    amount: null
+
+  # Match Lunch Money category names. Leave an amount as null until tuned.
+  categories:
+    - name: Restaurants
+      monthly_limit: 250.00
+      discretionary: true
+      warning_at_ratio: 0.85
+      alarm_at_ratio: 1.00
+
+    - name: Groceries
+      monthly_limit: 450.00
+      discretionary: false
+      warning_at_ratio: 0.90
+      alarm_at_ratio: 1.00
+
+    - name: Coffee
+      monthly_limit: 120.00
+      discretionary: true
+      warning_at_ratio: 0.85
+      alarm_at_ratio: 1.00
+
+    - name: Software / AI Tools
+      monthly_limit: 400.00
+      discretionary: true
+      warning_at_ratio: 0.85
+      alarm_at_ratio: 1.00
+
+    - name: Adult Content
+      monthly_limit: 150.00
+      discretionary: true
+      warning_at_ratio: 0.85
+      alarm_at_ratio: 1.00
+
+    - name: Child / Family
+      monthly_limit: 600.00
+      discretionary: false
+      warning_at_ratio: 0.90
+      alarm_at_ratio: 1.00
+
+    - name: Gas / Transport
+      monthly_limit: 300.00
+      discretionary: false
+      warning_at_ratio: 0.90
+      alarm_at_ratio: 1.00
+
+    - name: Subscriptions
+      monthly_limit: 175.00
+      discretionary: true
+      warning_at_ratio: 0.85
+      alarm_at_ratio: 1.00
+
+    - name: Shopping
+      monthly_limit: 250.00
+      discretionary: true
+      warning_at_ratio: 0.85
+      alarm_at_ratio: 1.00
+
+    - name: Fees
+      monthly_limit: 75.00
+      discretionary: false
+      warning_at_ratio: 0.75
+      alarm_at_ratio: 1.00
+
+  discretionary_total:
+    enabled: true
+    monthly_limit: 900.00
+    warning_at_ratio: 0.85
+    alarm_at_ratio: 1.00
+
+lockscreen:
+  enabled: true
+  # Use a 5-day spend window by default so the weekly number stays tighter and
+  # the daily number remains glanceable on the lockscreen.
+  weekly_spend_days: 5
+  # Dopamine is intentionally stricter than the general daily allowance.
+  dopamine_ratio_of_today: 0.85
+  dopamine_daily_cap: 35.00
+
+alarms:
+  # `monitor` writes an alarm report either way, but local notification only
+  # fires when one of these alarm types appears and --notify is passed.
+  notify_on:
+    - cash_buffer_low
+    - category_budget_exceeded
+    - category_budget_pacing
+    - discretionary_budget_exceeded
+    - recurring_amount_change
+    - duplicate_charge
+    - high_transaction
+
+  # Existing rule hits that should be promoted into alarms.
+  promote_rule_hits:
+    high_transaction:
+      severity: warning
+      resource: transaction_review
+    new_merchant:
+      severity: info
+      resource: merchant_review
+    duplicate_charge:
+      severity: warning
+      resource: duplicate_charge_review
+    uncategorized:
+      severity: info
+      resource: categorization_review
+    recurring_amount_change:
+      severity: warning
+      resource: subscription_review
+    unusual_daily_spend:
+      severity: warning
+      resource: spending_slowdown
+    category_budget_pacing:
+      severity: warning
+      resource: budget_pacing_review
+
+weekly_email:
+  enabled: true
+  day: sunday
+  time: "09:00"
+  timezone: America/Phoenix
+  budgeting_session: Sunday afternoon
+  lookback_days: 7
+  include_today: false
+  subject: Weekly budget review
+  max_agenda_items: 6
+  max_watchlist_items: 6
+  max_cost_value_nudges: 4
+  max_delegation_items: 5
+  include_shareable_context: true
+  include_info_in_agenda: false
+  include_chatgpt_json: false
+  send:
+    enabled: false
+    # Actual values come from environment variables:
+    # BUDGET_EMAIL_TO, BUDGET_EMAIL_FROM, SMTP_HOST, SMTP_PORT,
+    # SMTP_USERNAME, SMTP_PASSWORD, SMTP_USE_TLS.
+
+slack:
+  enabled: false
+  webhook_env: SLACK_WEBHOOK_URL
+  title: Sunday budget brief is ready
+  include_local_paths: true
+
+finance_agent:
+  enabled: true
+  mode: local_context_packet
+  response_style: practical_cautious
+  openai_api_automation:
+    decision: approved_later_gated
+    enabled: false
+    rationale: "Use local reports and context packets first. Add API calls only after alert criteria, privacy boundaries, and review flows are stable."
+    allowed_when:
+      - Patrick explicitly enables it
+      - only structured summaries are sent, not raw full transaction dumps
+      - no Lunch Money write-back is performed by the model
+      - answers cite local report paths and uncertainty
+      - private categories stay summarized unless Patrick asks for detail
+    first_use_cases:
+      - summarize reports/questions/latest.md on demand
+      - summarize reports/alarms/latest.md when alarms are active
+      - classify alerts as interrupt, weekly-review, or dashboard-only
+      - suggest merchant-map edits for Patrick review
+    not_allowed:
+      - automatic purchases or financial decisions
+      - automatic category write-back
+      - sending raw tokens, credentials, or account identifiers
+      - posting private financial details to Slack without Patrick approval
+  answer_sources:
+    - reports/latest.md
+    - reports/alarms/latest.md
+    - data/lunchmoney.db
+    - config/rules.yaml
+    - config/budget.yaml
+    - config/merchant_map.yaml
+  pending_criteria:
+    - define Patrick's real cash buffer
+    - define weekly discretionary comfort zone
+    - define merchants that should be ignored or weekly-review only
+    - define which alerts are important enough to interrupt Patrick
+    - decide when to enable gated OpenAI API automation
+
+resources:
+  transaction_review:
+    title: Review transaction
+    actions:
+      - confirm the charge is real
+      - decide whether it changes next week's spending plan
+      - add merchant to ignore list if this is recurring noise
+
+  merchant_review:
+    title: New merchant review
+    actions:
+      - identify whether this merchant should be expected going forward
+      - leave it on the watchlist or add it to the ignore list
+      - tag as subscription if recurring
+
+  duplicate_charge_review:
+    title: Duplicate charge review
+    actions:
+      - compare transaction IDs and dates
+      - wait for pending charges to settle if needed
+      - dispute or request refund if duplicate remains
+
+  categorization_review:
+    title: Categorization cleanup
+    actions:
+      - categorize before doing the Sunday budget pass
+      - decide whether this category is discretionary
+      - update local budget mapping if category is important
+
+  subscription_review:
+    title: Subscription review
+    actions:
+      - confirm the new recurring amount
+      - decide whether the increase is acceptable
+      - update expected recurring cost after review
+
+  spending_slowdown:
+    title: Spending slowdown
+    actions:
+      - decide whether this changes next week's spending plan
+      - check whether this is a planned high-spend day
+      - move noisy items to weekly review instead of urgent alerts
+
+  budget_pacing_review:
+    title: Budget pacing review
+    actions:
+      - compare month-to-date spend against remaining days
+      - pause or reduce discretionary category spend
+      - adjust budget only if the plan changed
+
+  cash_buffer_review:
+    title: Cash buffer review
+    actions:
+      - verify account balances
+      - defer discretionary spend
+      - decide whether money needs to move into checking

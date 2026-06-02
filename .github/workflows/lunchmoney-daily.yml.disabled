@@ -1,0 +1,36 @@
+# Disabled by filename. Rename to `lunchmoney-daily.yml` only if you want this
+# to run in GitHub Actions and you accept the privacy tradeoff.
+#
+# Required repository secret:
+# - LUNCHMONEY_ACCESS_TOKEN
+
+name: Lunch Money Daily Finance Watcher
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "30 15 * * *" # 8:30 AM America/Phoenix during MST; adjust as needed.
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run daily finance watcher
+        env:
+          LUNCHMONEY_ACCESS_TOKEN: ${{ secrets.LUNCHMONEY_ACCESS_TOKEN }}
+        run: python -m src.main run-all
+
+      # Optional: upload the report as an artifact instead of committing it.
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #     name: lunchmoney-daily-report
+      #     path: reports/latest.md

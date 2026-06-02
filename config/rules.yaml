@@ -1,0 +1,51 @@
+# Starter defaults. Tune these after reviewing a few real reports.
+
+pull:
+  # Needs at least 90 days so daily spend checks have history.
+  lookback_days: 120
+  include_pending: true
+
+checks:
+  recent_transaction_days: 3
+
+  high_transaction:
+    enabled: true
+    threshold: 150.00
+
+  new_merchant:
+    enabled: true
+    ignore_merchants: []
+
+  duplicate_charge:
+    enabled: true
+    window_days: 3
+    amount_tolerance: 0.01
+
+  uncategorized:
+    enabled: true
+
+  recurring_amount_change:
+    enabled: true
+    amount_tolerance: 0.50
+
+  unusual_daily_spend:
+    enabled: true
+    windows: [30, 90]
+    multiplier: 2.0
+    minimum_spend: 150.00
+
+  category_budget_pacing:
+    enabled: true
+    threshold_ratio: 1.15
+    minimum_overspend: 10.00
+
+report:
+  max_flagged_transactions: 40
+
+todo:
+  - define Patrick's actual alert thresholds
+  - define categories considered discretionary
+  - define merchants to ignore
+  - define target monthly savings / cash buffer
+  - enable gated OpenAI API automation only after privacy and alert criteria are stable
+  - later build Streamlit dashboard

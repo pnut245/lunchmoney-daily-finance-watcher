@@ -1,0 +1,32 @@
+.env
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local financial data. Keep this project local/private unless you deliberately
+# decide to version encrypted or scrubbed outputs.
+data/lunchmoney.db
+data/*.db
+data/*.db-*
+data/raw/
+data/budget_state.json
+data/lockscreen_latest.png
+
+reports/latest.md
+reports/daily/
+reports/alarms/
+reports/weekly/
+reports/questions/
+reports/impact/
+reports/merchants/
+
+$CODEX_HOME/
+
+!.gitkeep
+!data/.gitkeep
+!data/schema.md
+!reports/.gitkeep

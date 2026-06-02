@@ -1,0 +1,246 @@
+# Local-only merchant category suggestions.
+#
+# These rules do not write categories back to Lunch Money. They give the local
+# finance watcher a lightweight way to suggest category, privacy policy, and
+# review handling while Patrick tunes the real budget.
+
+merchant_map:
+  - match: "OpenAI"
+    category: "Software / AI Tools"
+    confidence: high
+    alert_policy: review_recurring
+
+  - match: "Openrouter"
+    category: "Software / AI Tools"
+    confidence: high
+    alert_policy: review_recurring
+
+  - match: "Midjourney"
+    category: "Software / AI Tools"
+    confidence: high
+    alert_policy: review_recurring
+
+  - match: "Notion"
+    category: "Software / AI Tools"
+    confidence: high
+    alert_policy: review_recurring
+
+  - match: "Elevenlabs"
+    category: "Software / AI Tools"
+    confidence: high
+    alert_policy: review_recurring
+
+  - match: "Adobe"
+    category: "Software / AI Tools"
+    confidence: high
+    alert_policy: review_recurring
+
+  - match: "Slack"
+    category: "Software / AI Tools"
+    confidence: high
+    alert_policy: review_recurring
+
+  - match: "X DEVELOPER"
+    category: "Software / AI Tools"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "Domain"
+    category: "Software / AI Tools"
+    confidence: medium
+    alert_policy: review_recurring
+
+  - match: "Chatai"
+    category: "Software / AI Tools"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "Patreon"
+    category: "Subscriptions"
+    confidence: medium
+    alert_policy: review_recurring
+
+  - match: "Playforman"
+    category: "Child / Family"
+    confidence: high
+    alert_policy: weekly_review
+
+  - match: "MMBILL.COM"
+    category: "Adult Content"
+    confidence: medium
+    alert_policy: private_review
+
+  - match: "Tinder"
+    category: "Adult Content"
+    confidence: medium
+    alert_policy: private_review
+
+  - match: "gotinder.com"
+    category: "Adult Content"
+    confidence: medium
+    alert_policy: private_review
+
+  - match: "Spred"
+    category: "Adult Content"
+    confidence: medium
+    alert_policy: private_review
+
+  - match: "Speedway"
+    category: "Gas / Transport"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "Circle K"
+    category: "Gas / Transport"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "AZ MVD"
+    category: "Gas / Transport"
+    confidence: high
+    alert_policy: weekly_review
+
+  - match: "Whole Foods"
+    category: "Groceries"
+    confidence: high
+    alert_policy: weekly_review
+
+  - match: "Food Conspiracy"
+    category: "Groceries"
+    confidence: high
+    alert_policy: weekly_review
+
+  - match: "OK Feed"
+    category: "Groceries"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "Time Market"
+    category: "Groceries"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "Coffee Times"
+    category: "Coffee"
+    confidence: high
+    alert_policy: weekly_review
+
+  - match: "Exo Roast"
+    category: "Coffee"
+    confidence: high
+    alert_policy: weekly_review
+
+  - match: "Dunkin"
+    category: "Coffee"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "Chipotle"
+    category: "Restaurants"
+    confidence: high
+    alert_policy: weekly_review
+
+  - match: "Del Taco"
+    category: "Restaurants"
+    confidence: high
+    alert_policy: weekly_review
+
+  - match: "Waffle House"
+    category: "Restaurants"
+    confidence: high
+    alert_policy: weekly_review
+
+  - match: "Seis Kitchen"
+    category: "Restaurants"
+    confidence: high
+    alert_policy: weekly_review
+
+  - match: "Raising Cane"
+    category: "Restaurants"
+    confidence: high
+    alert_policy: weekly_review
+
+  - match: "Amazon Prime"
+    category: "Subscriptions"
+    confidence: high
+    alert_policy: review_recurring
+
+  - match: "Spotify"
+    category: "Subscriptions"
+    confidence: high
+    alert_policy: review_recurring
+
+  - match: "Apple"
+    category: "Subscriptions"
+    confidence: medium
+    alert_policy: review_recurring
+
+  - match: "Amazon"
+    category: "Shopping"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "Home Depot"
+    category: "Shopping"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "Goodwill"
+    category: "Shopping"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "SWS Electronics"
+    category: "Shopping"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "Ddraw"
+    category: "Shopping"
+    confidence: low
+    alert_policy: weekly_review
+
+  - match: "CVS"
+    category: "Health"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "FedEx"
+    category: "Bills / Utilities"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "Affirm"
+    category: "Bills / Utilities"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "WELLS FARGO CARD"
+    category: "Bills / Utilities"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "Withdrawal Transfer"
+    category: "Transfers"
+    confidence: medium
+    alert_policy: dashboard_only
+
+  - match: "Venmo"
+    category: "Transfers"
+    confidence: medium
+    alert_policy: weekly_review
+
+  - match: "Courtesy Pay Overdraft Fee"
+    category: "Fees"
+    confidence: high
+    alert_policy: interrupt_if_repeated
+
+  - match: "Bank fees"
+    category: "Fees"
+    confidence: high
+    alert_policy: interrupt_if_repeated
+
+  - match: "Atm fees"
+    category: "Fees"
+    confidence: high
+    alert_policy: weekly_review

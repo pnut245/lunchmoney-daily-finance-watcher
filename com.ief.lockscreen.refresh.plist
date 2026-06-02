@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.ief.lockscreen.refresh</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/patrickfoley/Library/Application Support/ief-lockscreen/run_lockscreen_refresh.sh</string>
+  </array>
+  <key>WorkingDirectory</key>
+  <string>/Users/patrickfoley/Library/Application Support/ief-lockscreen</string>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>StartInterval</key>
+  <integer>900</integer>
+  <key>StandardOutPath</key>
+  <string>/Users/patrickfoley/Library/Logs/ief-lockscreen/refresh.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/patrickfoley/Library/Logs/ief-lockscreen/refresh.err.log</string>
+</dict>
+</plist>
