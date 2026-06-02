@@ -6,6 +6,7 @@ __pycache__/
 .ruff_cache/
 .venv/
 venv/
+.github/workflows/*.disabled
 
 # Local financial data. Keep this project local/private unless you deliberately
 # decide to version encrypted or scrubbed outputs.
