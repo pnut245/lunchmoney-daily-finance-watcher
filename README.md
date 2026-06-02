@@ -2,6 +2,8 @@
 
 A local-first starter project for pulling read-only data from the Lunch Money API, storing SQLite/raw JSON snapshots, running anomaly/rule checks, and producing a daily markdown report for deeper ChatGPT review.
 
+GitHub repo: [pnut245/lunchmoney-daily-finance-watcher](https://github.com/pnut245/lunchmoney-daily-finance-watcher)
+
 This project uses Lunch Money API v2 by default because Lunch Money recommends new projects start there, while v1 remains public beta. v2 is still alpha, so all API calls are isolated in `src/lunchmoney_client.py`.
 
 Docs:
