@@ -14,6 +14,7 @@ Can I spend this today?
 - A WidgetKit scaffold that reads `budget_state.json` from an app group.
 - A shared snapshot model using the V1 JSON fields.
 - An App Shortcut / App Intent to open the daily number.
+- A Swift Package build harness for the shared phone code.
 - Positive state: black number on white.
 - Negative state: white number on red.
 
@@ -81,6 +82,20 @@ Required fields:
 - Add the Swift files above with correct target membership.
 - Add a sync path that copies or downloads `budget_state.json` into the app group container.
 - Decide whether the phone app edits settings directly or remains display-only while Python/config remains source of truth.
+
+## Verification
+
+Run:
+
+```bash
+scripts/verify_phone_swift.sh
+```
+
+This checks:
+
+- iPhone app target Swift files with the iPhone SDK.
+- Widget extension Swift files with the iPhone SDK.
+- Swift Package tests for snapshot decoding/display formatting.
 
 ## Product Rule
 

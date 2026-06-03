@@ -1,9 +1,9 @@
 import AppIntents
 
 struct OpenOneNumberTodayIntent: AppIntent {
-    static var title: LocalizedStringResource = "Open One Number Today"
-    static var description = IntentDescription("Open the daily spending number.")
-    static var openAppWhenRun = true
+    static let title: LocalizedStringResource = "Open One Number Today"
+    static let description = IntentDescription("Open the daily spending number.")
+    static let openAppWhenRun = true
 
     @MainActor
     func perform() async throws -> some IntentResult {

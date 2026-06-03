@@ -16,6 +16,7 @@ This branch does not create a full Xcode project yet. It adds drop-in SwiftUI fi
 - Updated the WidgetKit provider to load the shared JSON instead of using preview-only data.
 - Simplified the widget configuration intent to the one-number use case.
 - Added an App Shortcut / App Intent to open One Number Today.
+- Added a Swift Package build harness and snapshot tests.
 - Added phone target setup docs.
 
 ## App Group Contract
@@ -31,6 +32,12 @@ budget_state.json
 ```
 
 ## Verification
+
+Full verification:
+
+```bash
+scripts/verify_phone_swift.sh
+```
 
 Swift type checks:
 
@@ -51,6 +58,13 @@ xcrun --sdk iphoneos swiftc -target arm64-apple-ios17.0 -parse-as-library -typec
   prototypes/iphone-widget/swiftui/LunchboxWidget.swift \
   prototypes/iphone-widget/swiftui/LunchboxWidgetBundle.swift
 ```
+
+Both passed.
+
+Swift Package tests:
+
+- `decodesOneNumberSnapshot`
+- `negativeSnapshotDisplaysSignedNumber`
 
 Both passed.
 
