@@ -111,6 +111,27 @@ The existing `run-all`, `monitor`, `alarms`, and `weekly-email` paths continue t
 
 `run_lockscreen_refresh.sh` uses `.venv/bin/python` when present, otherwise it falls back to `python3` or a caller-provided `PYTHON_BIN`.
 
+## Native Simulator Sync
+
+The iPhone app and widget read `budget_state.json` from the App Group:
+
+```text
+group.com.pnut245.one-number-today
+```
+
+For local simulator review, generate the state and copy it into the installed simulator app group:
+
+```bash
+python -m src.main one-number-state --date YYYY-MM-DD
+scripts/sync_ios_simulator_budget_state.sh
+```
+
+This preserves production behavior while proving the local path:
+
+```text
+config/budget.yaml -> calculation engine -> data/budget_state.json -> app group -> iPhone/widget render
+```
+
 ## V1 Candidate Decisions
 
 - PR #7 is the V1 candidate.
