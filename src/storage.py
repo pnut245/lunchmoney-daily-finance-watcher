@@ -149,6 +149,15 @@ CREATE TABLE IF NOT EXISTS rule_hits (
 );
 
 CREATE INDEX IF NOT EXISTS idx_rule_hits_run ON rule_hits(run_id);
+
+CREATE TABLE IF NOT EXISTS one_number_ledger (
+    month_key TEXT PRIMARY KEY,
+    result REAL NOT NULL,
+    daily_allowance REAL NOT NULL,
+    discretionary_spend REAL NOT NULL,
+    closed_at TEXT NOT NULL,
+    details_json TEXT NOT NULL
+);
 """
 
 
