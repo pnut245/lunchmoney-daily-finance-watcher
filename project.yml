@@ -15,6 +15,7 @@ targets:
     type: application
     platform: iOS
     sources:
+      - path: app/OneNumberToday/Assets.xcassets
       - path: prototypes/iphone-widget/swiftui/LunchboxWidgetModels.swift
       - path: prototypes/iphone-widget/swiftui/OneNumberAppIntents.swift
       - path: prototypes/iphone-widget/swiftui/OneNumberSnapshotStore.swift

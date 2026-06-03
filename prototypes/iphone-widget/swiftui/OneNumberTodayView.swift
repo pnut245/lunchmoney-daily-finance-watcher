@@ -7,6 +7,8 @@ struct OneNumberTodayView: View {
         GeometryReader { geometry in
             ZStack {
                 background.ignoresSafeArea()
+                pictureLayer
+                    .ignoresSafeArea()
 
                 VStack(spacing: 0) {
                     HStack(alignment: .firstTextBaseline) {
@@ -23,12 +25,16 @@ struct OneNumberTodayView: View {
                     Spacer(minLength: 0)
 
                     Text(snapshot.displayNumber)
-                        .font(.system(size: numberSize(for: geometry.size), weight: .black, design: .default))
+                        .font(.system(size: numberSize(for: geometry.size), weight: .black, design: .serif))
+                        .italic()
                         .monospacedDigit()
+                        .fontWidth(.compressed)
                         .minimumScaleFactor(0.2)
                         .lineLimit(1)
                         .foregroundStyle(primaryColor)
+                        .shadow(color: shadowColor, radius: 0, x: 0, y: 7)
                         .padding(.horizontal, 18)
+                        .frame(maxWidth: .infinity)
                         .accessibilityLabel(accessibilityText)
 
                     Spacer(minLength: 0)
@@ -49,6 +55,33 @@ struct OneNumberTodayView: View {
         primaryColor.opacity(snapshot.isNegative ? 0.74 : 0.48)
     }
 
+    private var shadowColor: Color {
+        snapshot.isNegative ? .black.opacity(0.18) : .black.opacity(0.08)
+    }
+
+    private var pictureLayer: some View {
+        VStack {
+            if !snapshot.isNegative {
+                HStack {
+                    Spacer()
+
+                    Image("OneNumberPositive")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 210, height: 210)
+                        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+                        .saturation(0.15)
+                        .contrast(1.25)
+                        .opacity(0.24)
+                        .padding(.top, 116)
+                        .padding(.trailing, -34)
+                }
+            }
+
+            Spacer()
+        }
+    }
+
     private var statusText: String {
         snapshot.isNegative ? "OVER TODAY" : "SAFE TO SPEND"
     }
@@ -65,7 +98,7 @@ struct OneNumberTodayView: View {
     }
 
     private func numberSize(for size: CGSize) -> CGFloat {
-        min(232, max(162, size.width * 0.6))
+        min(252, max(202, size.width * 0.68))
     }
 
     private static func snapshotDate(_ value: String) -> Date? {
@@ -95,6 +128,12 @@ struct OneNumberSettingsView: View {
                 LabeledContent("State", value: snapshot.isNegative ? "Over" : "Clear")
                 LabeledContent("Updated", value: updatedText)
             }
+
+            Section("Typeface Samples") {
+                TypefaceSampleRow(name: "Serif", value: snapshot.displayNumber, design: .serif, italic: true)
+                TypefaceSampleRow(name: "Rounded", value: snapshot.displayNumber, design: .rounded)
+                TypefaceSampleRow(name: "Plain", value: snapshot.displayNumber, design: .default)
+            }
         }
         .navigationTitle("Settings")
     }
@@ -115,6 +154,26 @@ struct OneNumberSettingsView: View {
 
     private func dollars(_ value: Double) -> String {
         "$\(Int(value.rounded()).formatted())"
+    }
+}
+
+struct TypefaceSampleRow: View {
+    let name: String
+    let value: String
+    let design: Font.Design
+    var italic = false
+
+    var body: some View {
+        HStack {
+            Text(name)
+            Spacer()
+            Text(value)
+                .font(.system(size: 42, weight: .black, design: design))
+                .fontWidth(.compressed)
+                .italic(italic)
+                .monospacedDigit()
+        }
+        .accessibilityElement(children: .combine)
     }
 }
 
