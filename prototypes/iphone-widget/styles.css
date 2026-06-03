@@ -26,7 +26,8 @@ body {
 
 button,
 input,
-textarea {
+textarea,
+code {
   font: inherit;
 }
 
@@ -141,6 +142,12 @@ textarea {
   margin: 14px 0 0;
   color: rgba(5, 5, 5, 0.56);
   font-size: 1rem;
+  line-height: 1.45;
+}
+
+.section-header code {
+  color: #050505;
+  font-weight: 760;
 }
 
 .settings-section {
@@ -212,6 +219,36 @@ textarea {
   border-radius: 8px;
   min-height: 48px;
   padding: 12px 18px;
+}
+
+.text-button {
+  margin-top: 14px;
+  border: 0;
+  background: transparent;
+  color: #050505;
+  padding: 0;
+  font-size: 0.92rem;
+  font-weight: 820;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.ledger-preview {
+  border-top: 1px solid rgba(5, 5, 5, 0.14);
+}
+
+.ledger-preview-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(5, 5, 5, 0.14);
+  font-size: 1.1rem;
+}
+
+.ledger-preview-row strong {
+  font-weight: 900;
 }
 
 .ledger-list {

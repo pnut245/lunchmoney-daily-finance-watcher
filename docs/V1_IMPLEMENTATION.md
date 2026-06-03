@@ -15,6 +15,8 @@ Important fields:
 
 The default daily allowance is `$55`.
 
+The web prototype settings are browser-local only. They are useful for trying control shapes, but they do not write to `config/budget.yaml` and do not change the Python calculation. Real V1 settings persist through the `one_number` section in `config/budget.yaml`.
+
 ## Calculation
 
 `src/one_number.py` calculates:
@@ -36,8 +38,28 @@ Primary V1 fields:
 - `remaining_today`
 - `is_negative`
 - `last_updated`
+- `excluded_categories`
+- `excluded_payees`
+- `reset_day`
+- `reset_time`
 
-Legacy fields such as `safe_to_spend` remain for existing prototype consumers, but now point at the V1 remaining number.
+The UI treats `remaining_today` and `is_negative` as authoritative. Legacy fields such as `safe_to_spend`, `today`, `week`, `dopamine`, `money_object`, and `spending_state` may remain for older consumers, but they must not drive the V1 visual hierarchy.
+
+Example:
+
+```json
+{
+  "daily_allowance": 55,
+  "today_discretionary_spend": 18,
+  "remaining_today": 37,
+  "is_negative": false,
+  "last_updated": "2026-06-02T23:00:00",
+  "excluded_categories": ["Rent", "Utilities", "Insurance"],
+  "excluded_payees": [],
+  "reset_day": 1,
+  "reset_time": "00:00"
+}
+```
 
 ## Ledger
 
@@ -55,6 +77,26 @@ The result is:
 daily_allowance * days_in_month - monthly_discretionary_spend
 ```
 
+Ledger/Vault is secondary. It is for month-end reflection, not the daily decision.
+
+## Lockscreen And Widget Output
+
+`src/lockscreen.py` reads `remaining_today` and `is_negative` first.
+
+Positive or zero:
+
+- white background
+- huge black number
+- no dollar sign
+
+Negative:
+
+- red background
+- huge white number
+- no warning copy
+
+The iPhone widget follows the same rule and renders only the number.
+
 ## Refresh
 
 Use:
@@ -64,3 +106,19 @@ python -m src.main one-number-state --date YYYY-MM-DD
 ```
 
 The existing `run-all`, `monitor`, `alarms`, and `weekly-email` paths continue to refresh `budget_state.json` through the existing budget-state output path.
+
+`run_lockscreen_refresh.sh` uses `.venv/bin/python` when present, otherwise it falls back to `python3` or a caller-provided `PYTHON_BIN`.
+
+## Safe Handoff ZIPs
+
+Do not include local runtime/private files in review ZIPs:
+
+- `.env`
+- `.venv/`
+- `data/lunchmoney.db`
+- `data/*.db`
+- `data/raw/`
+- `node_modules/`
+- `dist/`
+- `build/`
+- `.git/`

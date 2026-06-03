@@ -94,7 +94,7 @@ def build_budget_state_payload(
     ledger = one_number.ledger_entries(db_path, limit=12)
     remaining_today = float(one_number_state["remaining_today"])
 
-    display_state = "NEGATIVE" if one_number_state["is_negative"] else "OK"
+    display_state = "NEGATIVE" if one_number_state["is_negative"] else "V1"
     display_amount = _money(remaining_today)
 
     return {

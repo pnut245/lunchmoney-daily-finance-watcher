@@ -10,7 +10,7 @@ struct OneNumberTodayView: View {
 
                 VStack(spacing: 0) {
                     HStack(alignment: .firstTextBaseline) {
-                        Text(statusText)
+                        Text("SAFE TO SPEND")
                         Spacer(minLength: 16)
                         Text(updatedText)
                     }
@@ -49,10 +49,6 @@ struct OneNumberTodayView: View {
         primaryColor.opacity(snapshot.isNegative ? 0.74 : 0.48)
     }
 
-    private var statusText: String {
-        snapshot.isNegative ? "OVER TODAY" : "SAFE TO SPEND"
-    }
-
     private var updatedText: String {
         guard let date = Self.snapshotDate(snapshot.lastUpdated) else {
             return "UPDATED"
@@ -61,7 +57,7 @@ struct OneNumberTodayView: View {
     }
 
     private var accessibilityText: String {
-        snapshot.isNegative ? "Over today by \(snapshot.displayNumber)" : "Safe to spend \(snapshot.displayNumber)"
+        "Safe to spend \(snapshot.displayNumber)"
     }
 
     private func numberSize(for size: CGSize) -> CGFloat {

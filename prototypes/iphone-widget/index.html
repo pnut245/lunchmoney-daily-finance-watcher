@@ -27,7 +27,7 @@
         <div class="settings-wrap">
           <header class="section-header">
             <h1>Settings</h1>
-            <p>Configuration for the daily number.</p>
+            <p>Prototype controls only. The real calculation reads <code>one_number</code> from <code>config/budget.yaml</code>.</p>
           </header>
 
           <section class="settings-section">
@@ -65,6 +65,12 @@
                 <input id="reset-time" type="time" />
               </label>
             </div>
+          </section>
+
+          <section class="settings-section compact-section">
+            <h2>Ledger Preview</h2>
+            <div id="settings-ledger-preview" class="ledger-preview"></div>
+            <button class="text-button" type="button" data-screen="ledger">Open Vault</button>
           </section>
 
           <button id="save-settings" class="save-button" type="button">Save Settings</button>

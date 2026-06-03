@@ -62,6 +62,7 @@ function renderSnapshot(nextSnapshot) {
   document.getElementById("hero-number").textContent = moneyNumber(remaining);
   document.getElementById("updated-text").textContent = `Updated ${formatUpdated(snapshot.last_updated)}`;
   renderLedger(snapshot.ledger || []);
+  renderLedgerPreview(snapshot.ledger || []);
 }
 
 function formatUpdated(value) {
@@ -106,6 +107,25 @@ function renderLedger(entries) {
     .join("");
 }
 
+function renderLedgerPreview(entries) {
+  const preview = document.getElementById("settings-ledger-preview");
+  if (!preview) return;
+  const source = entries.length
+    ? entries.slice(0, 3)
+    : [
+        { month: "January", result: 412 },
+        { month: "February", result: 689 },
+        { month: "March", result: -82 },
+      ];
+  preview.innerHTML = source
+    .map((entry) => {
+      const result = Number(entry.result || 0);
+      const signed = `${result >= 0 ? "+" : "-"}${Math.abs(Math.round(result)).toLocaleString("en-US")}`;
+      return `<div class="ledger-preview-row"><span>${entry.month}</span><strong>${signed}</strong></div>`;
+    })
+    .join("");
+}
+
 function showScreen(name) {
   document.querySelectorAll("[data-screen-panel]").forEach((panel) => {
     panel.hidden = panel.dataset.screenPanel !== name;
@@ -130,8 +150,14 @@ async function refresh() {
     }
     renderSnapshot(await loadSnapshot());
   } catch (error) {
-    document.getElementById("updated-text").textContent = "Snapshot unavailable";
-    document.getElementById("hero-number").textContent = moneyNumber(settings.daily_allowance);
+    renderSnapshot({
+      daily_allowance: settings.daily_allowance,
+      today_discretionary_spend: 0,
+      remaining_today: settings.daily_allowance,
+      is_negative: false,
+      last_updated: new Date().toISOString(),
+      ledger: [],
+    });
     renderLedger([]);
   }
 }
