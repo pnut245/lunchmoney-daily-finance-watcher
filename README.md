@@ -13,6 +13,7 @@ Core docs:
 - `docs/PRODUCT.md`
 - `docs/DESIGN.md`
 - `docs/V1_IMPLEMENTATION.md`
+- `docs/PHONE_V1.md`
 
 Generate the widget-compatible JSON state:
 
