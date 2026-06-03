@@ -1,0 +1,434 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2F532574CE54666129B0646F /* LunchboxWidgetModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B000E4E86BB89C779CBE1673 /* LunchboxWidgetModels.swift */; };
+		313C47EE56AE4D6991BE5A2D /* LunchboxWidgetModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B000E4E86BB89C779CBE1673 /* LunchboxWidgetModels.swift */; };
+		40D8199A0DE701A5C70557D0 /* OneNumberTodayWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 68652284E4364E9727890E80 /* OneNumberTodayWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		56FA507CA6246091E2410D01 /* LunchboxWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E0A150D48F0BD94AED6E9 /* LunchboxWidgetBundle.swift */; };
+		5FE3FAF1F80FB64111F15626 /* OneNumberSnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A266F41A264BBF7DE7032A4 /* OneNumberSnapshotStore.swift */; };
+		8DC582A9616B4FCC885FDFF4 /* LunchboxWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AB5F6D79B8310BC81E0C4 /* LunchboxWidget.swift */; };
+		9B676F8D19B98F35D621BFE1 /* OneNumberSnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A266F41A264BBF7DE7032A4 /* OneNumberSnapshotStore.swift */; };
+		9EB79E6C0499DD1514792DD3 /* LunchboxWidgetIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF1DC9619D0BD549A55D508 /* LunchboxWidgetIntent.swift */; };
+		B1F7163910691BDC7385C247 /* OneNumberTodayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA45E1047B898BD5B5949E11 /* OneNumberTodayApp.swift */; };
+		B7FE95DEF7C5CD57C1BF6130 /* OneNumberTodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C669DD492B9BA275812D9 /* OneNumberTodayView.swift */; };
+		C1293C0C1257F38EBE15F5F0 /* OneNumberAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75B713A6428CAE6E55E09A6 /* OneNumberAppIntents.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		63B24DAECBFB91F55A08868E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA18733A810EFDD09F8F2A3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2CE3158845063F3A561562F2;
+			remoteInfo = OneNumberTodayWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7A1B4CAC17626DA165A335C4 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				40D8199A0DE701A5C70557D0 /* OneNumberTodayWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4A266F41A264BBF7DE7032A4 /* OneNumberSnapshotStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneNumberSnapshotStore.swift; sourceTree = "<group>"; };
+		68652284E4364E9727890E80 /* OneNumberTodayWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = OneNumberTodayWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		734C669DD492B9BA275812D9 /* OneNumberTodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneNumberTodayView.swift; sourceTree = "<group>"; };
+		7B5AB5F6D79B8310BC81E0C4 /* LunchboxWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchboxWidget.swift; sourceTree = "<group>"; };
+		836E0A150D48F0BD94AED6E9 /* LunchboxWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchboxWidgetBundle.swift; sourceTree = "<group>"; };
+		B000E4E86BB89C779CBE1673 /* LunchboxWidgetModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchboxWidgetModels.swift; sourceTree = "<group>"; };
+		BA45E1047B898BD5B5949E11 /* OneNumberTodayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneNumberTodayApp.swift; sourceTree = "<group>"; };
+		C75B713A6428CAE6E55E09A6 /* OneNumberAppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneNumberAppIntents.swift; sourceTree = "<group>"; };
+		EAF1DC9619D0BD549A55D508 /* LunchboxWidgetIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchboxWidgetIntent.swift; sourceTree = "<group>"; };
+		F784666ADE8211D3249EBE8C /* OneNumberToday.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OneNumberToday.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0FD75D67884BF6BF595258F3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F784666ADE8211D3249EBE8C /* OneNumberToday.app */,
+				68652284E4364E9727890E80 /* OneNumberTodayWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8919F4692F59B17D0E81259F = {
+			isa = PBXGroup;
+			children = (
+				FFF93CAD8BE824594283C163 /* swiftui */,
+				0FD75D67884BF6BF595258F3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FFF93CAD8BE824594283C163 /* swiftui */ = {
+			isa = PBXGroup;
+			children = (
+				7B5AB5F6D79B8310BC81E0C4 /* LunchboxWidget.swift */,
+				836E0A150D48F0BD94AED6E9 /* LunchboxWidgetBundle.swift */,
+				EAF1DC9619D0BD549A55D508 /* LunchboxWidgetIntent.swift */,
+				B000E4E86BB89C779CBE1673 /* LunchboxWidgetModels.swift */,
+				C75B713A6428CAE6E55E09A6 /* OneNumberAppIntents.swift */,
+				4A266F41A264BBF7DE7032A4 /* OneNumberSnapshotStore.swift */,
+				BA45E1047B898BD5B5949E11 /* OneNumberTodayApp.swift */,
+				734C669DD492B9BA275812D9 /* OneNumberTodayView.swift */,
+			);
+			name = swiftui;
+			path = "prototypes/iphone-widget/swiftui";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2CE3158845063F3A561562F2 /* OneNumberTodayWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4CD617D5BBA74F7BDFE1EAE /* Build configuration list for PBXNativeTarget "OneNumberTodayWidget" */;
+			buildPhases = (
+				F97B4691072B68F19FAE9F98 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneNumberTodayWidget;
+			packageProductDependencies = (
+			);
+			productName = OneNumberTodayWidget;
+			productReference = 68652284E4364E9727890E80 /* OneNumberTodayWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		E6884252E798F33D6F394CAD /* OneNumberToday */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAC4D7B0FCAE041CD2EF59AD /* Build configuration list for PBXNativeTarget "OneNumberToday" */;
+			buildPhases = (
+				0B67EB85B329B3CD712556C5 /* Sources */,
+				7A1B4CAC17626DA165A335C4 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8024892769CC392F781ACF47 /* PBXTargetDependency */,
+			);
+			name = OneNumberToday;
+			packageProductDependencies = (
+			);
+			productName = OneNumberToday;
+			productReference = F784666ADE8211D3249EBE8C /* OneNumberToday.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA18733A810EFDD09F8F2A3C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					2CE3158845063F3A561562F2 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					E6884252E798F33D6F394CAD = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = F8632553884CB2BEDA9182C9 /* Build configuration list for PBXProject "OneNumberToday" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 8919F4692F59B17D0E81259F;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 0FD75D67884BF6BF595258F3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E6884252E798F33D6F394CAD /* OneNumberToday */,
+				2CE3158845063F3A561562F2 /* OneNumberTodayWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0B67EB85B329B3CD712556C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				313C47EE56AE4D6991BE5A2D /* LunchboxWidgetModels.swift in Sources */,
+				C1293C0C1257F38EBE15F5F0 /* OneNumberAppIntents.swift in Sources */,
+				9B676F8D19B98F35D621BFE1 /* OneNumberSnapshotStore.swift in Sources */,
+				B1F7163910691BDC7385C247 /* OneNumberTodayApp.swift in Sources */,
+				B7FE95DEF7C5CD57C1BF6130 /* OneNumberTodayView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F97B4691072B68F19FAE9F98 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DC582A9616B4FCC885FDFF4 /* LunchboxWidget.swift in Sources */,
+				56FA507CA6246091E2410D01 /* LunchboxWidgetBundle.swift in Sources */,
+				9EB79E6C0499DD1514792DD3 /* LunchboxWidgetIntent.swift in Sources */,
+				2F532574CE54666129B0646F /* LunchboxWidgetModels.swift in Sources */,
+				5FE3FAF1F80FB64111F15626 /* OneNumberSnapshotStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8024892769CC392F781ACF47 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2CE3158845063F3A561562F2 /* OneNumberTodayWidget */;
+			targetProxy = 63B24DAECBFB91F55A08868E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		03415074BA79F3B2BBD9789D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		229EA42A9BBE6740AB9E8A6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = app/OneNumberTodayWidget/OneNumberTodayWidget.entitlements;
+				INFOPLIST_FILE = app/OneNumberTodayWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pnut245.OneNumberToday.widget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2E9F2DA795492E3C0B386DEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		A9BD6A3E509AC4D2BD8BB500 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = app/OneNumberTodayWidget/OneNumberTodayWidget.entitlements;
+				INFOPLIST_FILE = app/OneNumberTodayWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pnut245.OneNumberToday.widget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B56A86D17112A5B362411939 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = app/OneNumberToday/OneNumberToday.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = app/OneNumberToday/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pnut245.OneNumberToday;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E2E5048E98393E4659B34802 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = app/OneNumberToday/OneNumberToday.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = app/OneNumberToday/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pnut245.OneNumberToday;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E4CD617D5BBA74F7BDFE1EAE /* Build configuration list for PBXNativeTarget "OneNumberTodayWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				229EA42A9BBE6740AB9E8A6B /* Debug */,
+				A9BD6A3E509AC4D2BD8BB500 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F8632553884CB2BEDA9182C9 /* Build configuration list for PBXProject "OneNumberToday" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2E9F2DA795492E3C0B386DEC /* Debug */,
+				03415074BA79F3B2BBD9789D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FAC4D7B0FCAE041CD2EF59AD /* Build configuration list for PBXNativeTarget "OneNumberToday" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2E5048E98393E4659B34802 /* Debug */,
+				B56A86D17112A5B362411939 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA18733A810EFDD09F8F2A3C /* Project object */;
+}

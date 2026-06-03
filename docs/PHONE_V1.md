@@ -12,8 +12,11 @@ Can I spend this today?
 
 - A minimal SwiftUI host app scaffold.
 - A WidgetKit scaffold that reads `budget_state.json` from an app group.
+- A generated Xcode project with app and widget targets.
+- An XcodeGen project spec so target membership stays reviewable.
 - A shared snapshot model using the V1 JSON fields.
 - An App Shortcut / App Intent to open the daily number.
+- A Swift Package build harness for the shared phone code.
 - Positive state: black number on white.
 - Negative state: white number on red.
 
@@ -66,21 +69,55 @@ Required fields:
 ```json
 {
   "daily_allowance": 55,
-  "today_discretionary_spend": 18,
-  "remaining_today": 37,
+  "today_discretionary_spend": 0,
+  "remaining_today": 55,
   "is_negative": false,
   "last_updated": "2026-06-02T23:00:00"
 }
 ```
 
+## Xcode Project
+
+The generated project is:
+
+```text
+OneNumberToday.xcodeproj
+```
+
+The project source of truth is:
+
+```text
+project.yml
+```
+
+Regenerate after target changes:
+
+```bash
+xcodegen generate
+```
+
 ## Still Needed For A Real App Store / TestFlight Build
 
-- Create an Xcode iOS app target.
-- Create a Widget Extension target.
-- Add App Group entitlements to both targets.
-- Add the Swift files above with correct target membership.
+- Set the Apple development team for signing.
+- Create/enable the App Group in the Apple developer account.
 - Add a sync path that copies or downloads `budget_state.json` into the app group container.
 - Decide whether the phone app edits settings directly or remains display-only while Python/config remains source of truth.
+
+## Verification
+
+Run:
+
+```bash
+scripts/verify_phone_swift.sh
+```
+
+This checks:
+
+- iPhone app target Swift files with the iPhone SDK.
+- Widget extension Swift files with the iPhone SDK.
+- Swift Package tests for snapshot decoding/display formatting.
+
+Simulator verification also passed with the generated Xcode project on iPhone 17.
 
 ## Product Rule
 

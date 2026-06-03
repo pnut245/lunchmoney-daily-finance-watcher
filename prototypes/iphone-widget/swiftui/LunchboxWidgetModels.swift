@@ -24,8 +24,8 @@ extension LunchboxWidgetSnapshot {
 
     static let preview = LunchboxWidgetSnapshot(
         dailyAllowance: 55,
-        todayDiscretionarySpend: 18,
-        remainingToday: 37,
+        todayDiscretionarySpend: 0,
+        remainingToday: 55,
         isNegative: false,
         lastUpdated: "2026-06-02T23:00:00"
     )
