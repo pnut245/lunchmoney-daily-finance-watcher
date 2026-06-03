@@ -88,6 +88,27 @@ budget:
     warning_at_ratio: 0.85
     alarm_at_ratio: 1.00
 
+one_number:
+  enabled: true
+  daily_allowance: 55.00
+  preset_amounts:
+    - 5
+    - 25
+    - 55
+    - 111
+  excluded_categories:
+    - Rent
+    - Mortgage
+    - Insurance
+    - Utilities
+    - Taxes
+    - Transfers
+    - Savings
+    - Income
+  excluded_payees: []
+  reset_day: 1
+  reset_time: "00:00"
+
 lockscreen:
   enabled: true
   # Use a 5-day spend window by default so the weekly number stays tighter and

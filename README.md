@@ -2,6 +2,31 @@
 
 A local-first starter project for pulling read-only data from the Lunch Money API, storing SQLite/raw JSON snapshots, running anomaly/rule checks, and producing a daily markdown report for deeper ChatGPT review.
 
+GitHub repo: [pnut245/lunchmoney-daily-finance-watcher](https://github.com/pnut245/lunchmoney-daily-finance-watcher)
+
+## One Number Today V1
+
+This repo now includes a V1 layer for **One Number Today**: an ADHD-friendly daily allowance interface centered on one number.
+
+Core docs:
+
+- `docs/PRODUCT.md`
+- `docs/DESIGN.md`
+- `docs/V1_IMPLEMENTATION.md`
+- `docs/PHONE_V1.md`
+
+Generate the widget-compatible JSON state:
+
+```bash
+python -m src.main one-number-state --date 2026-06-02
+```
+
+Serve the prototype from the repo root and open:
+
+```text
+http://localhost:8421/prototypes/iphone-widget/
+```
+
 This project uses Lunch Money API v2 by default because Lunch Money recommends new projects start there, while v1 remains public beta. v2 is still alpha, so all API calls are isolated in `src/lunchmoney_client.py`.
 
 Docs:
@@ -85,60 +110,40 @@ The repo includes a small lockscreen renderer that converts a local JSON budget 
 python -m src.lockscreen data/budget_state.json data/lockscreen_latest.png
 ```
 
+To render and apply the generated image as the current macOS desktop wallpaper:
+
+```bash
+./run_lockscreen_refresh.sh
+```
+
 Expected default paths:
 
 - `data/budget_state.json`
 - `data/lockscreen_latest.png`
 
-The renderer accepts flexible JSON. It works best with fields like:
+The V1 renderer uses these fields first:
 
 ```json
 {
-  "title": "Sunday Budget Brief",
-  "summary": "On track overall. Dining is running hot.",
-  "updated_at": "2026-06-01T06:45:00Z",
-  "metrics": [
-    {"label": "Cash", "value": "$12,450"},
-    {"label": "MTD Spend", "value": "$2,140"},
-    {"label": "Review Items", "value": "3"}
-  ],
-  "notes": [
-    "Check two large grocery runs",
-    "Decide whether Coffee limit should increase"
-  ]
+  "remaining_today": 55,
+  "is_negative": false,
+  "last_updated": "2026-06-02T23:00:00"
 }
 ```
 
-If those fields are absent, it falls back to rendering a simple key/value dump of the JSON.
+When `remaining_today` is present, the lockscreen is strict V1: one oversized number, no dollar sign, black on white for positive/zero, white on red for negative.
 
-For the stripped-down ADHD lockscreen, provide these fields instead:
+For negative:
 
 ```json
 {
-  "safe_to_spend": "$42",
-  "spending_state": "COMFORTABLE",
-  "money_object": "Dinner Plate",
-  "today": "$42",
-  "week": "$210",
-  "dopamine": "$35"
+  "remaining_today": -12,
+  "is_negative": true,
+  "last_updated": "2026-06-02T23:00:00"
 }
 ```
 
-When those fields are present, the renderer switches to the minimal layout automatically and uses the lockscreen V1 direction:
-
-- one dominant safe-to-spend number
-- one object label that gives the number meaning
-- one urgency color/theme based on the spending state
-- Week and Dopamine as supporting context only
-
-The current spending-state ladder is:
-
-- `PLENTY`
-- `COMFORTABLE`
-- `WATCH IT`
-- `TIGHT`
-- `DANGER`
-- `OVERDRAWN`
+If V1 fields are absent, the renderer falls back to the older generic JSON summary renderer for compatibility.
 
 The watcher now writes this snapshot automatically after `monitor`, `alarms`, `run-all`, and `weekly-email`. By default it updates:
 
@@ -147,18 +152,13 @@ The watcher now writes this snapshot automatically after `monitor`, `alarms`, `r
 - `~/Library/Application Support/ief-lockscreen/budget_state.json` if the LaunchAgent runtime exists
 - `~/Library/Application Support/ief-lockscreen/lockscreen_latest.png` if the LaunchAgent runtime exists
 
-The lockscreen amounts are derived from the local discretionary budget policy in `config/budget.yaml`:
+`run_lockscreen_refresh.sh` renders the PNG and, by default, applies it as the current macOS wallpaper with `osascript`. To render without changing the wallpaper:
 
-- `safe_to_spend` / `today`: remaining discretionary budget spread across the remaining days in the month
-- `week`: a tighter 5-day projection from that same remaining budget
-- `dopamine`: a stricter sub-cap based on `dopamine_ratio_of_today` and `dopamine_daily_cap`
+```bash
+LOCKSCREEN_APPLY_WALLPAPER=0 ./run_lockscreen_refresh.sh
+```
 
-The watcher also derives:
-
-- `spending_state`: urgency bucket based on safe-to-spend, alarms, and cash-buffer pressure
-- `money_object`: a simple purchase metaphor such as `Coffee Cup`, `Grocery Bag`, or `Shopping Cart`
-
-You can tune the behavior under the `lockscreen:` section in `config/budget.yaml`.
+The lockscreen amount is derived from `one_number` in `config/budget.yaml`: `daily_allowance - today_discretionary_spend`, after excluded categories and payees are removed.
 
 ### LaunchAgent
 
@@ -169,7 +169,7 @@ Install the local LaunchAgent to regenerate the PNG every 15 minutes:
 ```
 
 This installs `com.ief.lockscreen.refresh.plist` into `~/Library/LaunchAgents`, runs at load plus every 15 minutes, and writes logs to `~/Library/Logs/ief-lockscreen/`.
-The installer also copies a self-contained runtime into `~/Library/Application Support/ief-lockscreen/` so the agent does not depend on macOS background access to `Documents`.
+The installer also copies a self-contained runtime into `~/Library/Application Support/ief-lockscreen/` so the agent does not depend on macOS background access to `Documents`, then applies the refreshed wallpaper on each scheduled run.
 
 ## Local Merchant Map
 

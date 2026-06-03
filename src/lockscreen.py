@@ -49,6 +49,13 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def render_lockscreen(payload: dict[str, Any]) -> Image.Image:
+    v1_snapshot = _coerce_v1_snapshot(payload)
+    if v1_snapshot:
+        image = Image.new("RGBA", (WIDTH, HEIGHT), v1_snapshot["background"])
+        draw = ImageDraw.Draw(image, "RGBA")
+        _render_v1_lockscreen(draw, v1_snapshot)
+        return image
+
     adhd_snapshot = _coerce_adhd_snapshot(payload)
     if adhd_snapshot:
         image = _build_background(adhd_snapshot["theme"])
@@ -99,6 +106,39 @@ def render_lockscreen(payload: dict[str, Any]) -> Image.Image:
             cursor_y = _draw_wrapped_text(draw, line, cursor_x, cursor_y, content_width, body_font, TEXT_PRIMARY)
             cursor_y += 8
     return image
+
+
+def _render_v1_lockscreen(draw: ImageDraw.ImageDraw, snapshot: dict[str, Any]) -> None:
+    center_x = WIDTH / 2
+    label_font = _load_font(40, bold=True, family="apple_ui")
+    number_font = _load_font(720, bold=True, family="apple_display")
+
+    _draw_tracked_text_centered(
+        draw,
+        center_x,
+        176,
+        "SAFE TO SPEND",
+        label_font,
+        snapshot["muted_text"],
+        tracking=9,
+    )
+
+    text = snapshot["display_number"]
+    bbox = draw.textbbox((0, 0), text, font=number_font, anchor="lt")
+    text_width = bbox[2] - bbox[0]
+    max_width = WIDTH - 96
+    while text_width > max_width and getattr(number_font, "size", 0) > 360:
+        number_font = _load_font(number_font.size - 24, bold=True, family="apple_display")
+        bbox = draw.textbbox((0, 0), text, font=number_font, anchor="lt")
+        text_width = bbox[2] - bbox[0]
+
+    draw.text(
+        (center_x, HEIGHT * 0.52),
+        text,
+        font=number_font,
+        fill=snapshot["text"],
+        anchor="mm",
+    )
 
 
 def _render_adhd_lockscreen(draw: ImageDraw.ImageDraw, snapshot: dict[str, str]) -> None:
@@ -425,6 +465,44 @@ def _coerce_adhd_snapshot(payload: dict[str, Any]) -> dict[str, str] | None:
         "money_object": money_object or _object_for_money_text(safe_to_spend),
         "theme": _theme_for_state(state),
     }
+
+
+def _coerce_v1_snapshot(payload: dict[str, Any]) -> dict[str, Any] | None:
+    remaining = _first_number(
+        payload.get("remaining_today"),
+        payload.get("meta", {}).get("remaining_today") if isinstance(payload.get("meta"), dict) else None,
+    )
+    if remaining is None:
+        return None
+
+    is_negative = bool(payload.get("is_negative", remaining < 0))
+    return {
+        "display_number": _format_v1_number(remaining),
+        "background": "#D71920" if is_negative else "#FFFFFF",
+        "text": "#FFFFFF" if is_negative else "#000000",
+        "muted_text": (255, 255, 255, 165) if is_negative else (0, 0, 0, 120),
+    }
+
+
+def _first_number(*values: Any) -> float | None:
+    for value in values:
+        if value is None or value == "":
+            continue
+        if isinstance(value, (int, float)):
+            return float(value)
+        cleaned = str(value).replace("$", "").replace(",", "").strip()
+        try:
+            return float(cleaned)
+        except ValueError:
+            continue
+    return None
+
+
+def _format_v1_number(value: float) -> str:
+    rounded = round(value)
+    if abs(value - rounded) < 0.005:
+        return f"{rounded:,.0f}"
+    return f"{value:,.2f}"
 
 
 def _fallback_lines(payload: dict[str, Any]) -> list[str]:

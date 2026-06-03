@@ -1,0 +1,65 @@
+name: OneNumberToday
+options:
+  bundleIdPrefix: com.pnut245
+  deploymentTarget:
+    iOS: "17.0"
+settings:
+  base:
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    SWIFT_VERSION: "6.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+targets:
+  OneNumberToday:
+    type: application
+    platform: iOS
+    sources:
+      - path: prototypes/iphone-widget/swiftui/LunchboxWidgetModels.swift
+      - path: prototypes/iphone-widget/swiftui/OneNumberAppIntents.swift
+      - path: prototypes/iphone-widget/swiftui/OneNumberSnapshotStore.swift
+      - path: prototypes/iphone-widget/swiftui/OneNumberTodayApp.swift
+      - path: prototypes/iphone-widget/swiftui/OneNumberTodayView.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.pnut245.OneNumberToday
+    info:
+      path: app/OneNumberToday/Info.plist
+      properties:
+        CFBundleDisplayName: One Number Today
+        UILaunchScreen:
+          UIColorName: ""
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+    entitlements:
+      path: app/OneNumberToday/OneNumberToday.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.pnut245.one-number-today
+    dependencies:
+      - target: OneNumberTodayWidget
+        embed: true
+  OneNumberTodayWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: prototypes/iphone-widget/swiftui/LunchboxWidget.swift
+      - path: prototypes/iphone-widget/swiftui/LunchboxWidgetBundle.swift
+      - path: prototypes/iphone-widget/swiftui/LunchboxWidgetIntent.swift
+      - path: prototypes/iphone-widget/swiftui/LunchboxWidgetModels.swift
+      - path: prototypes/iphone-widget/swiftui/OneNumberSnapshotStore.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.pnut245.OneNumberToday.widget
+        SKIP_INSTALL: YES
+    info:
+      path: app/OneNumberTodayWidget/Info.plist
+      properties:
+        CFBundleDisplayName: One Number Today Widget
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: app/OneNumberTodayWidget/OneNumberTodayWidget.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.pnut245.one-number-today

@@ -10,9 +10,10 @@ if [ -f .env ]; then
   set +a
 fi
 
-if [ ! -x .venv/bin/python ]; then
-  echo "Missing virtual environment. Create it first: python3 -m venv .venv && .venv/bin/pip install -r requirements.txt" >&2
-  exit 1
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+
+if [ -x .venv/bin/python ]; then
+  PYTHON_BIN=".venv/bin/python"
 fi
 
 DEFAULT_INPUT_PATH="$(pwd)/budget_state.json"
@@ -29,4 +30,4 @@ fi
 INPUT_PATH="${BUDGET_STATE_PATH:-$DEFAULT_INPUT_PATH}"
 OUTPUT_PATH="${LOCKSCREEN_OUTPUT_PATH:-$DEFAULT_OUTPUT_PATH}"
 
-.venv/bin/python -m src.lockscreen "$INPUT_PATH" "$OUTPUT_PATH"
+"$PYTHON_BIN" -m src.lockscreen "$INPUT_PATH" "$OUTPUT_PATH"

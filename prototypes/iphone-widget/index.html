@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>One Number Today</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main id="app" class="app is-loading">
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-button is-active" type="button" data-screen="daily">Today</button>
+        <button class="nav-button" type="button" data-screen="settings">Settings</button>
+        <button class="nav-button" type="button" data-screen="ledger">Vault</button>
+        <button id="reload-button" class="reload-button" type="button">Refresh</button>
+      </nav>
+
+      <section id="daily-screen" class="screen daily-screen" data-screen-panel="daily">
+        <div class="daily-meta">
+          <span>SAFE TO SPEND</span>
+          <span id="updated-text">Loading</span>
+        </div>
+        <div id="hero-number" class="hero-number">55</div>
+      </section>
+
+      <section id="settings-screen" class="screen settings-screen" data-screen-panel="settings" hidden>
+        <div class="settings-wrap">
+          <header class="section-header">
+            <h1>Settings</h1>
+            <p>Prototype controls only. The real calculation reads <code>one_number</code> from <code>config/budget.yaml</code>.</p>
+          </header>
+
+          <section class="settings-section">
+            <h2>Daily Allowance</h2>
+            <div id="allowance-options" class="allowance-options" role="radiogroup" aria-label="Daily allowance"></div>
+            <label class="field">
+              <span>Custom amount</span>
+              <input id="custom-allowance" type="number" min="1" step="1" inputmode="numeric" />
+            </label>
+          </section>
+
+          <section class="settings-section">
+            <h2>Exclusions</h2>
+            <div class="exclusion-grid">
+              <label class="field">
+                <span>Excluded categories</span>
+                <textarea id="excluded-categories" rows="8"></textarea>
+              </label>
+              <label class="field">
+                <span>Excluded payees</span>
+                <textarea id="excluded-payees" rows="8"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="settings-section compact-section">
+            <h2>Monthly Reset</h2>
+            <div class="reset-row">
+              <label class="field">
+                <span>Reset day</span>
+                <input id="reset-day" type="number" min="1" max="31" step="1" />
+              </label>
+              <label class="field">
+                <span>Reset time</span>
+                <input id="reset-time" type="time" />
+              </label>
+            </div>
+          </section>
+
+          <section class="settings-section compact-section">
+            <h2>Ledger Preview</h2>
+            <div id="settings-ledger-preview" class="ledger-preview"></div>
+            <button class="text-button" type="button" data-screen="ledger">Open Vault</button>
+          </section>
+
+          <button id="save-settings" class="save-button" type="button">Save Settings</button>
+        </div>
+      </section>
+
+      <section id="ledger-screen" class="screen ledger-screen" data-screen-panel="ledger" hidden>
+        <div class="settings-wrap">
+          <header class="section-header">
+            <h1>Vault</h1>
+            <p>Month-end results only.</p>
+          </header>
+          <div id="ledger-list" class="ledger-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js?v=one-number-v1"></script>
+  </body>
+</html>
