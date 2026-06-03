@@ -262,6 +262,8 @@ def main() -> int:
         )
         for path in outputs["json_paths"]:
             print(f"One Number Today state written to {path}")
+        for path in outputs["widget_paths"]:
+            print(f"Widget snapshot written to {path}")
     elif args.command == "one-number-close-month":
         entry = one_number.close_month(args.db_path, budget_config, args.date)
         print(
@@ -361,6 +363,8 @@ def _refresh_lockscreen_state(
 
     if outputs["png_paths"]:
         print(f"Lockscreen assets refreshed: {outputs['png_paths'][0]}")
+    if outputs["widget_paths"]:
+        print(f"Widget snapshot refreshed: {outputs['widget_paths'][0]}")
 
 
 def generate_sample_report(reports_root: Path, config: dict, report_date: date) -> Path:

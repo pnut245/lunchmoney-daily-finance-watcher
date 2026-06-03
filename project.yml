@@ -1,0 +1,49 @@
+name: Lunchbox
+options:
+  bundleIdPrefix: com.patrickfoley
+  deploymentTarget:
+    iOS: "18.0"
+settings:
+  base:
+    DEVELOPMENT_TEAM: 44LJQT9WG3
+    SWIFT_VERSION: 5.0
+    GENERATE_INFOPLIST_FILE: YES
+    CURRENT_PROJECT_VERSION: 1
+    MARKETING_VERSION: 0.1
+targets:
+  Lunchbox:
+    type: application
+    platform: iOS
+    sources:
+      - path: ios/Lunchbox
+      - path: ios/Shared
+    settings:
+      base:
+        DEVELOPMENT_TEAM: 44LJQT9WG3
+        CODE_SIGN_STYLE: Automatic
+        PRODUCT_BUNDLE_IDENTIFIER: com.patrickfoley.Lunchbox
+        PRODUCT_NAME: Lunchbox
+        TARGETED_DEVICE_FAMILY: "1,2"
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: ios/Lunchbox/Info.plist
+    dependencies:
+      - target: OneNumberWidget
+        embed: true
+  OneNumberWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: ios/OneNumberWidget
+      - path: ios/Shared
+    settings:
+      base:
+        DEVELOPMENT_TEAM: 44LJQT9WG3
+        CODE_SIGN_STYLE: Automatic
+        PRODUCT_BUNDLE_IDENTIFIER: com.patrickfoley.Lunchbox.onenumberwidget
+        PRODUCT_NAME: OneNumberWidget
+        SKIP_INSTALL: YES
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: ios/OneNumberWidget/Info.plist
+        INFOPLIST_KEY_LSRequiresIPhoneOS: YES
+        INFOPLIST_KEY_UIBackgroundModes:
+          - fetch

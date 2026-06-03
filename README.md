@@ -26,6 +26,47 @@ Serve the prototype from the repo root and open:
 http://localhost:8421/prototypes/iphone-widget/
 ```
 
+## Native iPhone Prototype
+
+The repo now includes a native SwiftUI app plus WidgetKit extension under `ios/` and a generated Xcode project:
+
+- `Lunchbox.xcodeproj`
+- `ios/Lunchbox/`
+- `ios/OneNumberWidget/`
+- `ios/Shared/`
+
+Regenerate the Xcode project after source-controlled project changes:
+
+```bash
+xcodegen generate
+```
+
+Run the local snapshot server first so the app and widget can fetch live data:
+
+```bash
+cd /Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher
+python3 -m http.server 8422
+```
+
+Then open `Lunchbox.xcodeproj` in Xcode and run the `Lunchbox` scheme on an iPhone simulator.
+The default in-app snapshot URL is:
+
+```text
+http://127.0.0.1:8422/data/widget_snapshot.json
+```
+
+For a real iPhone on the same network, replace `127.0.0.1` with this Mac's LAN IP.
+
+To refresh the baked-in suggested LAN URL after your Mac's IP changes:
+
+```bash
+./update-ios-dev-host.sh
+```
+
+The app now declares local network usage and local ATS intent for private-network HTTP testing. On a real iPhone, expect a Local Network permission prompt the first time the app tries to reach your Mac.
+
+For Personal Team installs, the current native prototype avoids `App Groups` so signing is simpler. The app and widget do not share edited URL settings yet; the widget uses its own built-in default URL and the app stores its URL locally.
+
 This project uses Lunch Money API v2 by default because Lunch Money recommends new projects start there, while v1 remains public beta. v2 is still alpha, so all API calls are isolated in `src/lunchmoney_client.py`.
 
 Docs:
@@ -173,9 +214,12 @@ The current spending-state ladder is:
 The watcher now writes this snapshot automatically after `monitor`, `alarms`, `run-all`, and `weekly-email`. By default it updates:
 
 - `data/budget_state.json`
+- `data/widget_snapshot.json`
 - `data/lockscreen_latest.png`
 - `~/Library/Application Support/ief-lockscreen/budget_state.json` if the LaunchAgent runtime exists
+- `~/Library/Application Support/ief-lockscreen/widget_snapshot.json` if the LaunchAgent runtime exists
 - `~/Library/Application Support/ief-lockscreen/lockscreen_latest.png` if the LaunchAgent runtime exists
+- `~/Library/Application Support/lunchmoney-finance-watcher/widget_snapshot.json` if the hourly monitor runtime exists
 
 `run_lockscreen_refresh.sh` renders the PNG and, by default, applies it as the current macOS wallpaper with `osascript`. To render without changing the wallpaper:
 
@@ -206,6 +250,32 @@ Install the local LaunchAgent to regenerate the PNG every 15 minutes:
 
 This installs `com.ief.lockscreen.refresh.plist` into `~/Library/LaunchAgents`, runs at load plus every 15 minutes, and writes logs to `~/Library/Logs/ief-lockscreen/`.
 The installer also copies a self-contained runtime into `~/Library/Application Support/ief-lockscreen/` so the agent does not depend on macOS background access to `Documents`, then applies the refreshed wallpaper on each scheduled run.
+
+### Hourly Monitor LaunchAgent
+
+Install the local LaunchAgent to run the read-only hourly finance monitor outside Codex:
+
+```bash
+./install-hourly-monitor-launch-agent.sh
+```
+
+This installs `com.ief.lunchmoney.hourly-monitor.plist` into `~/Library/LaunchAgents`, runs at load plus every hour, and writes logs to `~/Library/Logs/lunchmoney-finance-watcher/`.
+The installer also copies a self-contained runtime into `~/Library/Application Support/lunchmoney-finance-watcher/` so the agent does not depend on macOS background access to `Documents`.
+
+Runtime artifacts land under:
+
+- `~/Library/Application Support/lunchmoney-finance-watcher/reports/`
+- `~/Library/Application Support/lunchmoney-finance-watcher/data/`
+
+Useful checks:
+
+```bash
+launchctl list | rg com.ief.lunchmoney.hourly-monitor
+tail -n 40 ~/Library/Logs/lunchmoney-finance-watcher/hourly-monitor.out.log
+tail -n 40 ~/Library/Logs/lunchmoney-finance-watcher/hourly-monitor.err.log
+```
+
+If you switch to this local agent, disable the Codex automation for the same watcher so it stops generating Playground-area inbox items.
 
 ## Local Merchant Map
 

@@ -1,6 +1,6 @@
 import Foundation
 
-struct LunchboxWidgetSnapshot: Codable, Equatable {
+struct LunchboxSnapshot: Codable, Equatable {
     let dailyAllowance: Double
     let todayDiscretionarySpend: Double
     let remainingToday: Double
@@ -38,10 +38,14 @@ struct LunchboxWidgetSnapshot: Codable, Equatable {
     }
 }
 
-extension LunchboxWidgetSnapshot {
+extension LunchboxSnapshot {
     var displayNumber: String {
         let rounded = Int(remainingToday.rounded())
         return rounded.formatted()
+    }
+
+    var updatedDate: Date? {
+        ISO8601DateFormatter().date(from: lastUpdated)
     }
 
     func emphasisAmount(_ emphasis: WidgetEmphasis) -> Double {
@@ -66,12 +70,12 @@ extension LunchboxWidgetSnapshot {
         }
     }
 
-    static let preview = LunchboxWidgetSnapshot(
+    static let preview = LunchboxSnapshot(
         dailyAllowance: 55,
         todayDiscretionarySpend: 18,
         remainingToday: 37,
         isNegative: false,
-        lastUpdated: "2026-06-02T23:00:00",
+        lastUpdated: "2026-06-02T23:00:00Z",
         todayLabel: "Today",
         todayAmount: 37,
         weekLabel: "Week",
@@ -85,12 +89,12 @@ extension LunchboxWidgetSnapshot {
         criticalAlarms: 0
     )
 
-    static let negativePreview = LunchboxWidgetSnapshot(
+    static let negativePreview = LunchboxSnapshot(
         dailyAllowance: 55,
         todayDiscretionarySpend: 67,
         remainingToday: -12,
         isNegative: true,
-        lastUpdated: "2026-06-02T23:00:00",
+        lastUpdated: "2026-06-02T23:00:00Z",
         todayLabel: "Today",
         todayAmount: -12,
         weekLabel: "Week",
@@ -103,4 +107,10 @@ extension LunchboxWidgetSnapshot {
         warningAlarms: 0,
         criticalAlarms: 2
     )
+}
+
+enum WidgetEmphasis: String, Codable, CaseIterable {
+    case today
+    case dopamine
+    case week
 }

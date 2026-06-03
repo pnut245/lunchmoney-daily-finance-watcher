@@ -1,4 +1,5 @@
-const SNAPSHOT_URL = "../../data/budget_state.json";
+const SNAPSHOT_URL = "../../data/widget_snapshot.json";
+const REFRESH_INTERVAL_MS = 60 * 1000;
 const STORAGE_KEY = "one-number-today-settings";
 const DEFAULT_SETTINGS = {
   daily_allowance: 55,
@@ -60,7 +61,10 @@ function renderSnapshot(nextSnapshot) {
   document.getElementById("app").classList.toggle("is-negative", isNegative);
   document.getElementById("app").classList.remove("is-loading");
   document.getElementById("hero-number").textContent = moneyNumber(remaining);
-  document.getElementById("updated-text").textContent = `Updated ${formatUpdated(snapshot.last_updated)}`;
+  const stateText = [snapshot.spending_state, snapshot.money_object].filter(Boolean).join(" / ");
+  document.getElementById("updated-text").textContent = stateText
+    ? `${stateText} · ${formatUpdated(snapshot.last_updated)}`
+    : `Updated ${formatUpdated(snapshot.last_updated)}`;
   renderLedger(snapshot.ledger || []);
 }
 
@@ -159,3 +163,4 @@ document.getElementById("reload-button").addEventListener("click", refresh);
 
 renderSettings();
 refresh();
+window.setInterval(refresh, REFRESH_INTERVAL_MS);

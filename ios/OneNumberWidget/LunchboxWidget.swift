@@ -2,29 +2,45 @@ import AppIntents
 import SwiftUI
 import WidgetKit
 
-struct LunchboxWidgetEntry: TimelineEntry {
+struct OneNumberEntry: TimelineEntry {
     let date: Date
-    let snapshot: LunchboxWidgetSnapshot
-    let configuration: LunchboxWidgetConfigurationIntent
+    let snapshot: LunchboxSnapshot
+    let configuration: OneNumberWidgetConfigurationIntent
 }
 
-struct LunchboxWidgetProvider: AppIntentTimelineProvider {
-    func placeholder(in context: Context) -> LunchboxWidgetEntry {
-        LunchboxWidgetEntry(date: .now, snapshot: .preview, configuration: .init())
+struct OneNumberWidgetProvider: AppIntentTimelineProvider {
+    func placeholder(in context: Context) -> OneNumberEntry {
+        OneNumberEntry(date: .now, snapshot: .preview, configuration: .init())
     }
 
-    func snapshot(for configuration: LunchboxWidgetConfigurationIntent, in context: Context) async -> LunchboxWidgetEntry {
-        LunchboxWidgetEntry(date: .now, snapshot: .preview, configuration: configuration)
+    func snapshot(for configuration: OneNumberWidgetConfigurationIntent, in context: Context) async -> OneNumberEntry {
+        OneNumberEntry(
+            date: .now,
+            snapshot: SnapshotStore.loadCachedSnapshot() ?? .preview,
+            configuration: configuration
+        )
     }
 
-    func timeline(for configuration: LunchboxWidgetConfigurationIntent, in context: Context) async -> Timeline<LunchboxWidgetEntry> {
-        let entry = LunchboxWidgetEntry(date: .now, snapshot: .preview, configuration: configuration)
+    func timeline(for configuration: OneNumberWidgetConfigurationIntent, in context: Context) async -> Timeline<OneNumberEntry> {
+        var snapshot = SnapshotStore.loadCachedSnapshot() ?? .preview
+
+        if let url = SnapshotStore.configuredURL {
+            do {
+                let fetched = try await SnapshotFetcher.fetch(from: url)
+                SnapshotStore.cache(snapshot: fetched)
+                snapshot = fetched
+            } catch {
+                SnapshotStore.saveError(error.localizedDescription)
+            }
+        }
+
+        let entry = OneNumberEntry(date: .now, snapshot: snapshot, configuration: configuration)
         return Timeline(entries: [entry], policy: .after(.now.addingTimeInterval(60 * 60)))
     }
 }
 
-struct LunchboxWidgetView: View {
-    let entry: LunchboxWidgetProvider.Entry
+struct OneNumberWidgetView: View {
+    let entry: OneNumberWidgetProvider.Entry
     @Environment(\.widgetFamily) private var family
 
     var body: some View {
@@ -39,16 +55,18 @@ struct LunchboxWidgetView: View {
         entry.snapshot.isNegative ? Color(red: 0.84, green: 0.1, blue: 0.13) : .white
     }
 
-    private var fontSize: CGFloat {
-        switch family {
-        case .systemMedium:
-            112
-        case .accessoryInline:
-            20
-        case .accessoryCircular, .accessoryRectangular:
-            30
-        default:
-            88
+    private var textColor: Color {
+        entry.snapshot.isNegative ? .white : .black
+    }
+
+    private var emphasis: WidgetEmphasis {
+        switch entry.configuration.emphasis {
+        case .today:
+            return .today
+        case .dopamine:
+            return .dopamine
+        case .week:
+            return .week
         }
     }
 
@@ -58,11 +76,11 @@ struct LunchboxWidgetView: View {
         case .systemMedium:
             HStack(alignment: .bottom, spacing: 18) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(entry.snapshot.emphasisLabel(entry.configuration.emphasis).uppercased())
+                    Text(entry.snapshot.emphasisLabel(emphasis).uppercased())
                         .font(.system(size: 14, weight: .bold, design: .rounded))
                         .tracking(0.8)
                     Text(entry.snapshot.displayNumber)
-                        .font(.system(size: fontSize, weight: .black, design: .rounded))
+                        .font(.system(size: 112, weight: .black, design: .rounded))
                         .minimumScaleFactor(0.28)
                         .lineLimit(1)
                     Text(entry.snapshot.moneyObject.uppercased())
@@ -77,33 +95,36 @@ struct LunchboxWidgetView: View {
                 }
             }
             .padding(18)
-            .foregroundStyle(entry.snapshot.isNegative ? .white : .black)
+            .foregroundStyle(textColor)
         case .accessoryRectangular:
             VStack(alignment: .leading, spacing: 4) {
-                Text(entry.snapshot.emphasisLabel(entry.configuration.emphasis))
+                Text(entry.snapshot.emphasisLabel(emphasis))
                 Text("\(entry.snapshot.displayNumber) • \(entry.snapshot.spendingState)")
                     .font(.system(size: 16, weight: .bold, design: .rounded))
             }
+            .foregroundStyle(textColor)
         case .accessoryInline:
-            Text("\(entry.snapshot.emphasisLabel(entry.configuration.emphasis)): \(entry.snapshot.displayNumber)")
+            Text("\(entry.snapshot.emphasisLabel(emphasis)): \(entry.snapshot.displayNumber)")
+                .foregroundStyle(textColor)
         case .accessoryCircular:
             Text(entry.snapshot.displayNumber)
                 .font(.system(size: 24, weight: .black, design: .rounded))
                 .minimumScaleFactor(0.3)
+                .foregroundStyle(textColor)
         default:
             VStack(alignment: .leading, spacing: 8) {
-                Text(entry.snapshot.emphasisLabel(entry.configuration.emphasis).uppercased())
+                Text(entry.snapshot.emphasisLabel(emphasis).uppercased())
                     .font(.system(size: 13, weight: .bold, design: .rounded))
                     .tracking(0.8)
                 Text(entry.snapshot.displayNumber)
-                    .font(.system(size: fontSize, weight: .black, design: .rounded))
+                    .font(.system(size: 88, weight: .black, design: .rounded))
                     .minimumScaleFactor(0.28)
                     .lineLimit(1)
                 Text(entry.snapshot.moneyObject.uppercased())
                     .font(.system(size: 12, weight: .semibold, design: .rounded))
             }
             .padding(16)
-            .foregroundStyle(entry.snapshot.isNegative ? .white : .black)
+            .foregroundStyle(textColor)
         }
     }
 
@@ -120,31 +141,31 @@ struct LunchboxWidgetView: View {
     }
 }
 
-struct LunchboxWidget: Widget {
-    let kind = "LunchboxWidget"
+struct OneNumberWidget: Widget {
+    let kind = "OneNumberWidget"
 
     var body: some WidgetConfiguration {
         AppIntentConfiguration(
             kind: kind,
-            intent: LunchboxWidgetConfigurationIntent.self,
-            provider: LunchboxWidgetProvider()
+            intent: OneNumberWidgetConfigurationIntent.self,
+            provider: OneNumberWidgetProvider()
         ) { entry in
-            LunchboxWidgetView(entry: entry)
+            OneNumberWidgetView(entry: entry)
         }
-        .configurationDisplayName("One Number Today")
+        .configurationDisplayName("One Number")
         .description("One daily number for spending decisions.")
         .supportedFamilies([.systemSmall, .systemMedium, .accessoryInline, .accessoryCircular, .accessoryRectangular])
     }
 }
 
 #Preview(as: .systemSmall) {
-    LunchboxWidget()
+    OneNumberWidget()
 } timeline: {
-    LunchboxWidgetEntry(date: .now, snapshot: .preview, configuration: .init())
+    OneNumberEntry(date: .now, snapshot: .preview, configuration: .init())
 }
 
 #Preview(as: .systemSmall) {
-    LunchboxWidget()
+    OneNumberWidget()
 } timeline: {
-    LunchboxWidgetEntry(date: .now, snapshot: .negativePreview, configuration: .init())
+    OneNumberEntry(date: .now, snapshot: .negativePreview, configuration: .init())
 }
