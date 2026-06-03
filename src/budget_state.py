@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import json
 from calendar import monthrange
-from datetime import date
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any
 
-from . import alarms, lockscreen, storage
+from . import alarms, lockscreen, one_number, storage
 
 
 RUNTIME_DIR = Path.home() / "Library" / "Application Support" / "ief-lockscreen"
@@ -85,25 +85,46 @@ def build_budget_state_payload(
     )
     object_name = _money_object_for_amount(today_amount)
 
+    one_number_state = one_number.build_state(
+        db_path,
+        budget_config,
+        run_date,
+        last_updated=datetime.now(UTC).isoformat(),
+    )
+    ledger = one_number.ledger_entries(db_path, limit=12)
+    remaining_today = float(one_number_state["remaining_today"])
+
+    display_state = "NEGATIVE" if one_number_state["is_negative"] else "OK"
+    display_amount = _money(remaining_today)
+
     return {
-        "safe_to_spend": _money(today_amount),
-        "spending_state": state_name,
+        **one_number_state,
+        "safe_to_spend": display_amount,
+        "spending_state": display_state,
         "money_object": object_name,
-        "today": _money(today_amount),
+        "today": display_amount,
         "week": _money(week_amount),
         "dopamine": _money(dopamine_amount),
         "vault_state": _vault_state(cash_balance, budget_config),
+        "ledger": ledger,
         "meta": {
             "source": "lunchmoney-daily-finance-watcher",
+            "product": "One Number Today",
             "run_date": run_date.isoformat(),
             "critical_alarms": critical_count,
             "warning_alarms": warning_count,
+            "daily_allowance": one_number_state["daily_allowance"],
+            "today_discretionary_spend": one_number_state["today_discretionary_spend"],
+            "remaining_today": one_number_state["remaining_today"],
+            "is_negative": one_number_state["is_negative"],
+            "safe_to_spend_value": remaining_today,
             "discretionary_monthly_limit": discretionary_context["monthly_limit"],
             "discretionary_month_to_date_spend": discretionary_context["month_to_date_spend"],
             "discretionary_remaining": discretionary_context["remaining"],
             "days_remaining_in_month": discretionary_context["days_remaining"],
             "available_cash_balance": cash_balance,
-            "safe_to_spend_value": today_amount,
+            "legacy_spending_state": state_name,
+            "legacy_safe_to_spend_value": today_amount,
             "money_object": object_name,
         },
     }

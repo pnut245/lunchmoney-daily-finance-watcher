@@ -10,7 +10,7 @@ import tempfile
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
-from . import alarms, budget_state, finance_ask, report, rules, slack_notify, storage, weekly_email
+from . import alarms, budget_state, finance_ask, one_number, report, rules, slack_notify, storage, weekly_email
 from .lunchmoney_client import LunchMoneyClient, pull_read_only_snapshot
 
 
@@ -101,6 +101,12 @@ def main() -> int:
     impact_parser.add_argument("--category", help="Budget category to test")
     impact_parser.add_argument("--merchant", help="Merchant/payee text for local category suggestion")
     impact_parser.add_argument("--date", type=_parse_date, default=date.today())
+
+    one_number_parser = subparsers.add_parser("one-number-state", help="Write One Number Today JSON state")
+    one_number_parser.add_argument("--date", type=_parse_date, default=date.today())
+
+    close_month_parser = subparsers.add_parser("one-number-close-month", help="Store a One Number Today month-end ledger entry")
+    close_month_parser.add_argument("--date", type=_parse_date, default=date.today())
 
     args = parser.parse_args()
     try:
@@ -247,6 +253,21 @@ def main() -> int:
             args.merchant_map,
         )
         print(f"Purchase impact written to {path}")
+    elif args.command == "one-number-state":
+        outputs = budget_state.refresh_budget_state(
+            args.db_path,
+            budget_config,
+            args.date,
+            project_root=PROJECT_ROOT,
+        )
+        for path in outputs["json_paths"]:
+            print(f"One Number Today state written to {path}")
+    elif args.command == "one-number-close-month":
+        entry = one_number.close_month(args.db_path, budget_config, args.date)
+        print(
+            "One Number Today ledger entry stored: "
+            f"{entry['month']} {entry['result']:+.2f}"
+        )
 
     return 0
 

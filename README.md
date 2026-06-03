@@ -4,6 +4,28 @@ A local-first starter project for pulling read-only data from the Lunch Money AP
 
 GitHub repo: [pnut245/lunchmoney-daily-finance-watcher](https://github.com/pnut245/lunchmoney-daily-finance-watcher)
 
+## One Number Today V1
+
+This repo now includes a V1 layer for **One Number Today**: an ADHD-friendly daily allowance interface centered on one number.
+
+Core docs:
+
+- `docs/PRODUCT.md`
+- `docs/DESIGN.md`
+- `docs/V1_IMPLEMENTATION.md`
+
+Generate the widget-compatible JSON state:
+
+```bash
+python -m src.main one-number-state --date 2026-06-02
+```
+
+Serve the prototype from the repo root and open:
+
+```text
+http://localhost:8421/prototypes/iphone-widget/
+```
+
 This project uses Lunch Money API v2 by default because Lunch Money recommends new projects start there, while v1 remains public beta. v2 is still alpha, so all API calls are isolated in `src/lunchmoney_client.py`.
 
 Docs:
@@ -87,6 +109,12 @@ The repo includes a small lockscreen renderer that converts a local JSON budget 
 python -m src.lockscreen data/budget_state.json data/lockscreen_latest.png
 ```
 
+To render and apply the generated image as the current macOS desktop wallpaper:
+
+```bash
+./run_lockscreen_refresh.sh
+```
+
 Expected default paths:
 
 - `data/budget_state.json`
@@ -149,6 +177,12 @@ The watcher now writes this snapshot automatically after `monitor`, `alarms`, `r
 - `~/Library/Application Support/ief-lockscreen/budget_state.json` if the LaunchAgent runtime exists
 - `~/Library/Application Support/ief-lockscreen/lockscreen_latest.png` if the LaunchAgent runtime exists
 
+`run_lockscreen_refresh.sh` renders the PNG and, by default, applies it as the current macOS wallpaper with `osascript`. To render without changing the wallpaper:
+
+```bash
+LOCKSCREEN_APPLY_WALLPAPER=0 ./run_lockscreen_refresh.sh
+```
+
 The lockscreen amounts are derived from the local discretionary budget policy in `config/budget.yaml`:
 
 - `safe_to_spend` / `today`: remaining discretionary budget spread across the remaining days in the month
@@ -171,7 +205,7 @@ Install the local LaunchAgent to regenerate the PNG every 15 minutes:
 ```
 
 This installs `com.ief.lockscreen.refresh.plist` into `~/Library/LaunchAgents`, runs at load plus every 15 minutes, and writes logs to `~/Library/Logs/ief-lockscreen/`.
-The installer also copies a self-contained runtime into `~/Library/Application Support/ief-lockscreen/` so the agent does not depend on macOS background access to `Documents`.
+The installer also copies a self-contained runtime into `~/Library/Application Support/ief-lockscreen/` so the agent does not depend on macOS background access to `Documents`, then applies the refreshed wallpaper on each scheduled run.
 
 ## Local Merchant Map
 
