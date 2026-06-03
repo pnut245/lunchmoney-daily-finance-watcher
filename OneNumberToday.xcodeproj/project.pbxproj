@@ -10,6 +10,7 @@
 		2F532574CE54666129B0646F /* LunchboxWidgetModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B000E4E86BB89C779CBE1673 /* LunchboxWidgetModels.swift */; };
 		313C47EE56AE4D6991BE5A2D /* LunchboxWidgetModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B000E4E86BB89C779CBE1673 /* LunchboxWidgetModels.swift */; };
 		40D8199A0DE701A5C70557D0 /* OneNumberTodayWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 68652284E4364E9727890E80 /* OneNumberTodayWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		44D2F5A9C671FDD1BA19458F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D45B319629F5904A2ED0A102 /* Assets.xcassets */; };
 		56FA507CA6246091E2410D01 /* LunchboxWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E0A150D48F0BD94AED6E9 /* LunchboxWidgetBundle.swift */; };
 		5FE3FAF1F80FB64111F15626 /* OneNumberSnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A266F41A264BBF7DE7032A4 /* OneNumberSnapshotStore.swift */; };
 		8DC582A9616B4FCC885FDFF4 /* LunchboxWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5AB5F6D79B8310BC81E0C4 /* LunchboxWidget.swift */; };
@@ -53,6 +54,7 @@
 		B000E4E86BB89C779CBE1673 /* LunchboxWidgetModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchboxWidgetModels.swift; sourceTree = "<group>"; };
 		BA45E1047B898BD5B5949E11 /* OneNumberTodayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneNumberTodayApp.swift; sourceTree = "<group>"; };
 		C75B713A6428CAE6E55E09A6 /* OneNumberAppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneNumberAppIntents.swift; sourceTree = "<group>"; };
+		D45B319629F5904A2ED0A102 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EAF1DC9619D0BD549A55D508 /* LunchboxWidgetIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchboxWidgetIntent.swift; sourceTree = "<group>"; };
 		F784666ADE8211D3249EBE8C /* OneNumberToday.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OneNumberToday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -70,9 +72,19 @@
 		8919F4692F59B17D0E81259F = {
 			isa = PBXGroup;
 			children = (
+				97420068F7D18026520CF4FF /* OneNumberToday */,
 				FFF93CAD8BE824594283C163 /* swiftui */,
 				0FD75D67884BF6BF595258F3 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		97420068F7D18026520CF4FF /* OneNumberToday */ = {
+			isa = PBXGroup;
+			children = (
+				D45B319629F5904A2ED0A102 /* Assets.xcassets */,
+			);
+			name = OneNumberToday;
+			path = app/OneNumberToday;
 			sourceTree = "<group>";
 		};
 		FFF93CAD8BE824594283C163 /* swiftui */ = {
@@ -116,6 +128,7 @@
 			buildConfigurationList = FAC4D7B0FCAE041CD2EF59AD /* Build configuration list for PBXNativeTarget "OneNumberToday" */;
 			buildPhases = (
 				0B67EB85B329B3CD712556C5 /* Sources */,
+				3625FC930F96F79A8A63B7A1 /* Resources */,
 				7A1B4CAC17626DA165A335C4 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -168,6 +181,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3625FC930F96F79A8A63B7A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44D2F5A9C671FDD1BA19458F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0B67EB85B329B3CD712556C5 /* Sources */ = {
