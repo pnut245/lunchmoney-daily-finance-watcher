@@ -97,6 +97,8 @@ Negative:
 
 The iPhone widget follows the same rule and renders only the number.
 
+The tiny `SAFE TO SPEND` label can remain for now, but it must stay visually secondary to the number. It should never become a state badge or explanatory label.
+
 ## Refresh
 
 Use:
@@ -108,6 +110,16 @@ python -m src.main one-number-state --date YYYY-MM-DD
 The existing `run-all`, `monitor`, `alarms`, and `weekly-email` paths continue to refresh `budget_state.json` through the existing budget-state output path.
 
 `run_lockscreen_refresh.sh` uses `.venv/bin/python` when present, otherwise it falls back to `python3` or a caller-provided `PYTHON_BIN`.
+
+## V1 Candidate Decisions
+
+- PR #7 is the V1 candidate.
+- PR #6 remains a future Poster/Object Mode exploration and should not be merged into V1.
+- Web settings stay prototype-only until a safe persistence path exists.
+- Legacy JSON fields stay temporarily for compatibility.
+- `remaining_today` and `is_negative` are the authoritative V1 display fields.
+- The next milestone is: `config/budget.yaml` -> calculation engine -> `budget_state.json` -> lockscreen/widget render.
+- The core acceptance test is: can the user glance at the phone, see one number, and feel calmer?
 
 ## Safe Handoff ZIPs
 

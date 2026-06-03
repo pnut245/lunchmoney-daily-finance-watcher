@@ -79,8 +79,25 @@ python -m src.lockscreen data/budget_state.json data/lockscreen_latest.png
 - Legacy JSON fields such as `safe_to_spend`, `week`, `dopamine`, `money_object`, and `spending_state` may still exist for compatibility, but V1 renderers ignore them when `remaining_today` is present.
 - The old generic JSON lockscreen renderer remains as a fallback only when V1 fields are absent.
 
+## Decisions For V1 Candidate
+
+- Keep the tiny `SAFE TO SPEND` label for now, but keep it visually secondary to the number.
+- Do not wire web settings to `config/budget.yaml` yet unless a safe persistence path exists.
+- Keep legacy JSON fields temporarily for compatibility.
+- Treat `remaining_today` and `is_negative` as authoritative V1 display fields.
+- Do not merge PR #6 into V1. Preserve it as future Poster/Object Mode exploration.
+
+## Next Milestone
+
+```text
+config/budget.yaml -> calculation engine -> budget_state.json -> lockscreen/widget render
+```
+
+## Acceptance Test
+
+Can the user glance at the phone, see one number, and feel calmer?
+
 ## Product Questions
 
-- Should the tiny `SAFE TO SPEND` label remain on lockscreen/widget/app surfaces, or should the hero be number-only everywhere?
 - Should web settings write back to `config/budget.yaml`, or remain a prototype surface until a native settings flow exists?
 - Should legacy top-level fields be removed completely after downstream consumers move to `remaining_today`?
