@@ -9,16 +9,26 @@ struct LunchboxWidgetEntry: TimelineEntry {
 }
 
 struct LunchboxWidgetProvider: AppIntentTimelineProvider {
+    private let store = OneNumberSnapshotStore()
+
     func placeholder(in context: Context) -> LunchboxWidgetEntry {
         LunchboxWidgetEntry(date: .now, snapshot: .preview, configuration: .init())
     }
 
     func snapshot(for configuration: LunchboxWidgetConfigurationIntent, in context: Context) async -> LunchboxWidgetEntry {
-        LunchboxWidgetEntry(date: .now, snapshot: .preview, configuration: configuration)
+        LunchboxWidgetEntry(
+            date: .now,
+            snapshot: store.loadSnapshot() ?? .preview,
+            configuration: configuration
+        )
     }
 
     func timeline(for configuration: LunchboxWidgetConfigurationIntent, in context: Context) async -> Timeline<LunchboxWidgetEntry> {
-        let entry = LunchboxWidgetEntry(date: .now, snapshot: .preview, configuration: configuration)
+        let entry = LunchboxWidgetEntry(
+            date: .now,
+            snapshot: store.loadSnapshot() ?? .preview,
+            configuration: configuration
+        )
         return Timeline(entries: [entry], policy: .after(.now.addingTimeInterval(15 * 60)))
     }
 }
