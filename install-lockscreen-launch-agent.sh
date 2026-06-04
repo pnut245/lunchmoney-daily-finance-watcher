@@ -24,6 +24,7 @@ cp "$SCRIPT_DIR/run_lockscreen_refresh.sh" "$RUNTIME_DIR/run_lockscreen_refresh.
 cp "$SCRIPT_DIR/requirements.txt" "$RUNTIME_DIR/requirements.txt"
 cp "$SCRIPT_DIR/src/__init__.py" "$RUNTIME_DIR/src/__init__.py"
 cp "$SCRIPT_DIR/src/lockscreen.py" "$RUNTIME_DIR/src/lockscreen.py"
+cp "$SCRIPT_DIR/src/wallpaper.py" "$RUNTIME_DIR/src/wallpaper.py"
 chmod +x "$RUNTIME_DIR/run_lockscreen_refresh.sh"
 
 if [[ ! -f "$RUNTIME_DIR/budget_state.json" ]]; then
@@ -45,4 +46,5 @@ echo "Logs: $LOG_DIR"
 echo "Runtime: $RUNTIME_DIR"
 echo "Input JSON: ${BUDGET_STATE_PATH:-$RUNTIME_DIR/budget_state.json}"
 echo "Output PNG: ${LOCKSCREEN_OUTPUT_PATH:-$RUNTIME_DIR/lockscreen_latest.png}"
+echo "Wallpaper apply: enabled by default (set LOCKSCREEN_APPLY_WALLPAPER=0 to render only)"
 echo "Schedule: every 15 minutes, plus run at load."

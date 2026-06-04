@@ -28,5 +28,10 @@ fi
 
 INPUT_PATH="${BUDGET_STATE_PATH:-$DEFAULT_INPUT_PATH}"
 OUTPUT_PATH="${LOCKSCREEN_OUTPUT_PATH:-$DEFAULT_OUTPUT_PATH}"
+APPLY_WALLPAPER="${LOCKSCREEN_APPLY_WALLPAPER:-1}"
 
 .venv/bin/python -m src.lockscreen "$INPUT_PATH" "$OUTPUT_PATH"
+
+if [ "$APPLY_WALLPAPER" != "0" ] && [ "$APPLY_WALLPAPER" != "false" ]; then
+  .venv/bin/python -m src.wallpaper "$OUTPUT_PATH"
+fi

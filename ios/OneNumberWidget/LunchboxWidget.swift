@@ -46,98 +46,50 @@ struct OneNumberWidgetView: View {
     var body: some View {
         ZStack {
             background
-            content
+            Text(entry.snapshot.displayNumber)
+                .font(numberFont)
+                .minimumScaleFactor(0.2)
+                .lineLimit(1)
+                .tracking(numberTracking)
+                .scaleEffect(x: 0.92, y: 1.0)
+                .foregroundStyle(foreground)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .containerBackground(background, for: .widget)
     }
 
     private var background: Color {
-        entry.snapshot.isNegative ? Color(red: 0.84, green: 0.1, blue: 0.13) : .white
+        entry.snapshot.isNegative ? Color(red: 0.88, green: 0.02, blue: 0.0) : .white
     }
 
-    private var textColor: Color {
+    private var foreground: Color {
         entry.snapshot.isNegative ? .white : .black
     }
 
-    private var emphasis: WidgetEmphasis {
-        switch entry.configuration.emphasis {
-        case .today:
-            return .today
-        case .dopamine:
-            return .dopamine
-        case .week:
-            return .week
-        }
-    }
-
-    @ViewBuilder
-    private var content: some View {
+    private var numberFont: Font {
         switch family {
         case .systemMedium:
-            HStack(alignment: .bottom, spacing: 18) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(entry.snapshot.emphasisLabel(emphasis).uppercased())
-                        .font(.system(size: 14, weight: .bold, design: .rounded))
-                        .tracking(0.8)
-                    Text(entry.snapshot.displayNumber)
-                        .font(.system(size: 112, weight: .black, design: .rounded))
-                        .minimumScaleFactor(0.28)
-                        .lineLimit(1)
-                    Text(entry.snapshot.moneyObject.uppercased())
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                }
-                Spacer(minLength: 0)
-                VStack(alignment: .trailing, spacing: 10) {
-                    metricPill(title: entry.snapshot.weekLabel, value: entry.snapshot.weekAmount)
-                    metricPill(title: entry.snapshot.dopamineLabel, value: entry.snapshot.dopamineAmount)
-                    Text(entry.snapshot.spendingState)
-                        .font(.system(size: 12, weight: .bold, design: .rounded))
-                }
-            }
-            .padding(18)
-            .foregroundStyle(textColor)
-        case .accessoryRectangular:
-            VStack(alignment: .leading, spacing: 4) {
-                Text(entry.snapshot.emphasisLabel(emphasis))
-                Text("\(entry.snapshot.displayNumber) • \(entry.snapshot.spendingState)")
-                    .font(.system(size: 16, weight: .bold, design: .rounded))
-            }
-            .foregroundStyle(textColor)
-        case .accessoryInline:
-            Text("\(entry.snapshot.emphasisLabel(emphasis)): \(entry.snapshot.displayNumber)")
-                .foregroundStyle(textColor)
+            return .system(size: 170, weight: .black, design: .default)
+        case .systemSmall:
+            return .system(size: 118, weight: .black, design: .default)
         case .accessoryCircular:
-            Text(entry.snapshot.displayNumber)
-                .font(.system(size: 24, weight: .black, design: .rounded))
-                .minimumScaleFactor(0.3)
-                .foregroundStyle(textColor)
+            return .system(size: 34, weight: .black, design: .default)
+        case .accessoryRectangular:
+            return .system(size: 46, weight: .black, design: .default)
+        case .accessoryInline:
+            return .system(size: 22, weight: .black, design: .default)
         default:
-            VStack(alignment: .leading, spacing: 8) {
-                Text(entry.snapshot.emphasisLabel(emphasis).uppercased())
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
-                    .tracking(0.8)
-                Text(entry.snapshot.displayNumber)
-                    .font(.system(size: 88, weight: .black, design: .rounded))
-                    .minimumScaleFactor(0.28)
-                    .lineLimit(1)
-                Text(entry.snapshot.moneyObject.uppercased())
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
-            }
-            .padding(16)
-            .foregroundStyle(textColor)
+            return .system(size: 118, weight: .black, design: .default)
         }
     }
 
-    private func metricPill(title: String, value: Double) -> some View {
-        VStack(alignment: .trailing, spacing: 2) {
-            Text(title.uppercased())
-                .font(.system(size: 10, weight: .bold, design: .rounded))
-            Text("$\(Int(value.rounded()))")
-                .font(.system(size: 18, weight: .black, design: .rounded))
+    private var numberTracking: CGFloat {
+        switch family {
+        case .accessoryInline:
+            return -1.5
+        default:
+            return -6
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 8)
-        .background(Color.black.opacity(entry.snapshot.isNegative ? 0.16 : 0.08), in: Capsule())
     }
 }
 
@@ -153,7 +105,7 @@ struct OneNumberWidget: Widget {
             OneNumberWidgetView(entry: entry)
         }
         .configurationDisplayName("One Number")
-        .description("One daily number for spending decisions.")
+        .description("Shows only today's remaining discretionary spend.")
         .supportedFamilies([.systemSmall, .systemMedium, .accessoryInline, .accessoryCircular, .accessoryRectangular])
     }
 }

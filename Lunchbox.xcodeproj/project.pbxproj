@@ -52,7 +52,7 @@
 		2D6DBB0760B97C8BD2646069 /* LunchboxWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LunchboxWidget.entitlements; sourceTree = "<group>"; };
 		312CCDABBCD02853F632CF99 /* DevHostConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevHostConfig.swift; sourceTree = "<group>"; };
 		34E5E892E77146F0D818135B /* LunchboxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchboxApp.swift; sourceTree = "<group>"; };
-		40B837665A91031932F9A7F1 /* OneNumberWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = OneNumberWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		40B837665A91031932F9A7F1 /* OneNumberWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneNumberWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		504A125D87AB41214DE1B27F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		50D873C090C353454E1D7D92 /* SnapshotStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotStore.swift; sourceTree = "<group>"; };
 		73E0B975A4CF0F345E4C8B41 /* LunchboxWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchboxWidgetBundle.swift; sourceTree = "<group>"; };
@@ -61,7 +61,7 @@
 		9391D3BD1F38590EEA2F4B26 /* LunchboxWidgetIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchboxWidgetIntent.swift; sourceTree = "<group>"; };
 		A27F8BE8DC4375F335C87449 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A85216F7533DDCFF7D081967 /* LunchboxSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchboxSnapshot.swift; sourceTree = "<group>"; };
-		AFABFDD6529C32793E22984B /* Lunchbox.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Lunchbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFABFDD6529C32793E22984B /* Lunchbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lunchbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7C5DD2BAF2CDDC909E983AF /* LunchboxWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchboxWidget.swift; sourceTree = "<group>"; };
 		EDB69F57233B05AA095A89A1 /* LunchboxApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LunchboxApp.entitlements; sourceTree = "<group>"; };
 		F47CFB8418CEFB014038630E /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
@@ -171,14 +171,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 2650;
 				TargetAttributes = {
 					0E2B86FB16AAFE49A9D26AAA = {
-						DevelopmentTeam = 44LJQT9WG3;
 						ProvisioningStyle = Automatic;
 					};
 					93B6401045CB1B898D8A1E69 = {
-						DevelopmentTeam = 44LJQT9WG3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -249,7 +247,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 44LJQT9WG3;
+				DEVELOPMENT_TEAM = 3MXW2FU446;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = ios/Lunchbox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -267,13 +265,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 44LJQT9WG3;
+				DEVELOPMENT_TEAM = 3MXW2FU446;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = ios/OneNumberWidget/Info.plist;
 				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
-				INFOPLIST_KEY_UIBackgroundModes = (
-					fetch,
-				);
+				INFOPLIST_KEY_UIBackgroundModes = fetch;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -326,6 +322,7 @@
 				DEVELOPMENT_TEAM = 44LJQT9WG3;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -341,6 +338,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -353,7 +351,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 44LJQT9WG3;
+				DEVELOPMENT_TEAM = 3MXW2FU446;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = ios/Lunchbox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -371,13 +369,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 44LJQT9WG3;
+				DEVELOPMENT_TEAM = 3MXW2FU446;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = ios/OneNumberWidget/Info.plist;
 				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
-				INFOPLIST_KEY_UIBackgroundModes = (
-					fetch,
-				);
+				INFOPLIST_KEY_UIBackgroundModes = fetch;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -430,6 +426,7 @@
 				DEVELOPMENT_TEAM = 44LJQT9WG3;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -452,6 +449,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

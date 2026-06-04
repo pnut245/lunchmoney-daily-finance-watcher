@@ -1,6 +1,10 @@
 aqwesome# iPhone Widget Prototype
 
-This folder contains a working local prototype for an iPhone finance widget and a parallel SwiftUI scaffold for a future native WidgetKit build.
+This folder contains the current browser prototype for the two-experience model:
+
+- `#/daily` for the minimal daily number
+- `#/portal` for planning, settings, and projections
+- `#/ledger` for buried monthly history
 
 ## Local browser prototype
 
@@ -20,8 +24,10 @@ http://localhost:8421/prototypes/iphone-widget/
 The page reads live data from:
 
 - `/data/widget_snapshot.json`
+- `/data/settings.json`
+- `/data/ledger.json`
 
-The prototype auto-refreshes every minute so you can leave it open while the local producer updates the snapshot on its own cadence.
+The prototype auto-refreshes the daily snapshot every minute so you can leave it open while the local producer updates the snapshot on its own cadence.
 
 ## Native scaffold
 

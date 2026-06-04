@@ -106,8 +106,20 @@ one_number:
     - Savings
     - Income
   excluded_payees: []
+  excluded_keywords:
+    - rent
+    - mortgage
+    - insurance
+    - utilities
+    - taxes
+    - transfer
+    - deposit
+    - loan payment
+    - credit card payment
+    - savings transfer
+    - reimbursement
   reset_day: 1
-  reset_time: "00:00"
+  reset_time: "04:00"
 
 lockscreen:
   enabled: true

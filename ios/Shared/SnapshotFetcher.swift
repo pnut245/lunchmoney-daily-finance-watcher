@@ -2,9 +2,11 @@ import Foundation
 
 enum SnapshotFetcher {
     static func fetch(from url: URL) async throws -> LunchboxSnapshot {
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 15)
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 8)
         let config = URLSessionConfiguration.ephemeral
-        config.waitsForConnectivity = true
+        config.waitsForConnectivity = false
+        config.timeoutIntervalForRequest = 8
+        config.timeoutIntervalForResource = 8
         let session = URLSession(configuration: config)
         let (data, response) = try await session.data(for: request)
         guard let http = response as? HTTPURLResponse, (200 ... 299).contains(http.statusCode) else {

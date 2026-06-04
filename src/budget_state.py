@@ -24,27 +24,43 @@ def refresh_budget_state(
     project_root: Path | None = None,
 ) -> dict[str, list[Path]]:
     payload = build_budget_state_payload(db_path, budget_config, run_date, active_alarms=active_alarms)
+    settings_payload = one_number.settings_export(budget_config)
+    ledger_payload = one_number.ledger_entries(db_path, limit=24)
     roots = _output_roots(project_root)
 
     json_paths: list[Path] = []
     widget_paths: list[Path] = []
     png_paths: list[Path] = []
+    settings_paths: list[Path] = []
+    ledger_paths: list[Path] = []
     image = lockscreen.render_lockscreen(payload)
     widget_payload = build_widget_snapshot_payload(payload)
 
     for root in roots:
         json_path = root / "budget_state.json"
         widget_path = root / "widget_snapshot.json"
+        settings_path = root / "settings.json"
+        ledger_path = root / "ledger.json"
         png_path = root / "lockscreen_latest.png"
         root.mkdir(parents=True, exist_ok=True)
         json_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
         widget_path.write_text(json.dumps(widget_payload, indent=2) + "\n", encoding="utf-8")
+        settings_path.write_text(json.dumps(settings_payload, indent=2) + "\n", encoding="utf-8")
+        ledger_path.write_text(json.dumps(ledger_payload, indent=2) + "\n", encoding="utf-8")
         image.save(png_path, format="PNG")
         json_paths.append(json_path)
         widget_paths.append(widget_path)
+        settings_paths.append(settings_path)
+        ledger_paths.append(ledger_path)
         png_paths.append(png_path)
 
-    return {"json_paths": json_paths, "widget_paths": widget_paths, "png_paths": png_paths}
+    return {
+        "json_paths": json_paths,
+        "widget_paths": widget_paths,
+        "settings_paths": settings_paths,
+        "ledger_paths": ledger_paths,
+        "png_paths": png_paths,
+    }
 
 
 def build_budget_state_payload(
@@ -138,30 +154,16 @@ def build_budget_state_payload(
 
 def build_widget_snapshot_payload(payload: dict[str, Any]) -> dict[str, Any]:
     remaining_today = float(payload.get("remaining_today", 0.0) or 0.0)
-    today_value = _money_string_to_number(payload.get("today"))
-    week_value = _money_string_to_number(payload.get("week"))
-    dopamine_value = _money_string_to_number(payload.get("dopamine"))
-    spending_state = str(payload.get("spending_state") or "OK")
-    money_object = str(payload.get("money_object") or "")
-    meta = payload.get("meta", {})
 
     return {
         "daily_allowance": float(payload.get("daily_allowance", 0.0) or 0.0),
         "today_discretionary_spend": float(payload.get("today_discretionary_spend", 0.0) or 0.0),
+        "spent_today": float(payload.get("spent_today", payload.get("today_discretionary_spend", 0.0)) or 0.0),
         "remaining_today": remaining_today,
         "is_negative": bool(payload.get("is_negative", remaining_today < 0)),
+        "state": payload.get("state", "positive"),
         "last_updated": payload.get("last_updated"),
-        "today_label": "Today",
-        "today_amount": today_value,
-        "week_label": "Week",
-        "week_amount": week_value,
-        "dopamine_label": "Dopamine",
-        "dopamine_amount": dopamine_value,
-        "spending_state": spending_state,
-        "money_object": money_object,
-        "vault_state": payload.get("vault_state", "UNKNOWN"),
-        "warning_alarms": int(meta.get("warning_alarms", 0) or 0),
-        "critical_alarms": int(meta.get("critical_alarms", 0) or 0),
+        "updated_at": payload.get("updated_at", payload.get("last_updated")),
     }
 
 

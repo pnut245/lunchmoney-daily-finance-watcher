@@ -57,6 +57,14 @@ http://127.0.0.1:8422/data/widget_snapshot.json
 
 For a real iPhone on the same network, replace `127.0.0.1` with this Mac's LAN IP.
 
+To make the snapshot server durable in the background on this Mac:
+
+```bash
+./install-snapshot-server-launch-agent.sh
+```
+
+This installs `com.ief.lunchmoney.snapshot-server.plist` into `~/Library/LaunchAgents`, serves the hourly runtime from `~/Library/Application Support/lunchmoney-finance-watcher/`, and keeps `http://<your-mac-ip>:8422/data/widget_snapshot.json` available after login.
+
 To refresh the baked-in suggested LAN URL after your Mac's IP changes:
 
 ```bash
@@ -259,7 +267,7 @@ Install the local LaunchAgent to run the read-only hourly finance monitor outsid
 ./install-hourly-monitor-launch-agent.sh
 ```
 
-This installs `com.ief.lunchmoney.hourly-monitor.plist` into `~/Library/LaunchAgents`, runs at load plus every hour, and writes logs to `~/Library/Logs/lunchmoney-finance-watcher/`.
+This installs `com.ief.lunchmoney.hourly-monitor.plist` into `~/Library/LaunchAgents`, runs at load plus at the top of each hour, and writes logs to `~/Library/Logs/lunchmoney-finance-watcher/`.
 The installer also copies a self-contained runtime into `~/Library/Application Support/lunchmoney-finance-watcher/` so the agent does not depend on macOS background access to `Documents`.
 
 Runtime artifacts land under:

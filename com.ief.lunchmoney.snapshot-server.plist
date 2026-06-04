@@ -4,23 +4,25 @@
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.ief.lunchmoney.hourly-monitor</string>
+  <string>com.ief.lunchmoney.snapshot-server</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/Users/patrickfoley/Library/Application Support/lunchmoney-finance-watcher/run_hourly_monitor.sh</string>
+    <string>/usr/bin/python3</string>
+    <string>-m</string>
+    <string>http.server</string>
+    <string>8422</string>
+    <string>--bind</string>
+    <string>0.0.0.0</string>
   </array>
   <key>WorkingDirectory</key>
   <string>/Users/patrickfoley/Library/Application Support/lunchmoney-finance-watcher</string>
   <key>RunAtLoad</key>
   <true/>
-  <key>StartCalendarInterval</key>
-  <dict>
-    <key>Minute</key>
-    <integer>0</integer>
-  </dict>
+  <key>KeepAlive</key>
+  <true/>
   <key>StandardOutPath</key>
-  <string>/Users/patrickfoley/Library/Logs/lunchmoney-finance-watcher/hourly-monitor.out.log</string>
+  <string>/Users/patrickfoley/Library/Logs/lunchmoney-finance-watcher/snapshot-server.out.log</string>
   <key>StandardErrorPath</key>
-  <string>/Users/patrickfoley/Library/Logs/lunchmoney-finance-watcher/hourly-monitor.err.log</string>
+  <string>/Users/patrickfoley/Library/Logs/lunchmoney-finance-watcher/snapshot-server.err.log</string>
 </dict>
 </plist>

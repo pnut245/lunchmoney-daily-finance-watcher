@@ -21,6 +21,19 @@ DEFAULT_EXCLUDED_CATEGORIES = [
     "Savings",
     "Income",
 ]
+DEFAULT_EXCLUDED_KEYWORDS = [
+    "rent",
+    "mortgage",
+    "insurance",
+    "utilities",
+    "taxes",
+    "transfer",
+    "deposit",
+    "loan payment",
+    "credit card payment",
+    "savings transfer",
+    "reimbursement",
+]
 DEFAULT_PRESETS = [5, 25, 55, 111]
 
 
@@ -36,12 +49,14 @@ def settings_from_config(budget_config: dict[str, Any]) -> dict[str, Any]:
         raw.get("excluded_categories", DEFAULT_EXCLUDED_CATEGORIES)
     )
     excluded_payees = _clean_strings(raw.get("excluded_payees", []))
+    excluded_keywords = _clean_strings(raw.get("excluded_keywords", DEFAULT_EXCLUDED_KEYWORDS))
     return {
         "enabled": bool(raw.get("enabled", True)),
         "daily_allowance": daily_allowance if daily_allowance is not None else 55.0,
         "preset_amounts": presets or DEFAULT_PRESETS,
         "excluded_categories": excluded_categories or DEFAULT_EXCLUDED_CATEGORIES,
         "excluded_payees": excluded_payees,
+        "excluded_keywords": excluded_keywords or DEFAULT_EXCLUDED_KEYWORDS,
         "reset_day": int(raw.get("reset_day", 1) or 1),
         "reset_time": str(raw.get("reset_time", "00:00") or "00:00"),
     }
@@ -63,11 +78,15 @@ def build_state(
     return {
         "daily_allowance": _round_money(daily_allowance),
         "today_discretionary_spend": _round_money(today_spend),
+        "spent_today": _round_money(today_spend),
         "remaining_today": _round_money(remaining_today),
         "is_negative": remaining_today < 0,
+        "state": "negative" if remaining_today < 0 else "positive",
         "last_updated": last_updated or run_date.isoformat(),
+        "updated_at": last_updated or run_date.isoformat(),
         "excluded_categories": settings["excluded_categories"],
         "excluded_payees": settings["excluded_payees"],
+        "excluded_keywords": settings["excluded_keywords"],
         "reset_day": settings["reset_day"],
         "reset_time": settings["reset_time"],
     }
@@ -92,6 +111,7 @@ def discretionary_spend_for_range(
     ).fetchall()
     excluded_categories = _normalized_set(settings.get("excluded_categories", []))
     excluded_payees = _normalized_set(settings.get("excluded_payees", []))
+    excluded_keywords = _normalized_set(settings.get("excluded_keywords", []))
     total = 0.0
     for row in rows:
         category = _normalize(row["category_name"])
@@ -99,6 +119,8 @@ def discretionary_spend_for_range(
         if category and category in excluded_categories:
             continue
         if payee and payee in excluded_payees:
+            continue
+        if excluded_keywords and any(keyword in category or keyword in payee for keyword in excluded_keywords):
             continue
         total += float(row["amount"] or 0.0)
     return round(total, 2)
@@ -171,12 +193,28 @@ def ledger_entries(db_path: Path, limit: int = 12) -> list[dict[str, Any]]:
         {
             "month": row["month_key"],
             "result": _round_money(row["result"]),
+            "month_result": _round_money(row["result"]),
             "daily_allowance": _round_money(row["daily_allowance"]),
             "discretionary_spend": _round_money(row["discretionary_spend"]),
             "closed_at": row["closed_at"],
+            "state": "negative" if float(row["result"] or 0.0) < 0 else "positive",
         }
         for row in rows
     ]
+
+
+def settings_export(budget_config: dict[str, Any]) -> dict[str, Any]:
+    settings = settings_from_config(budget_config)
+    return {
+        "daily_allowance": _round_money(settings["daily_allowance"]),
+        "excluded_keywords": settings["excluded_keywords"],
+        "excluded_categories": settings["excluded_categories"],
+        "excluded_payees": settings["excluded_payees"],
+        "preset_amounts": settings["preset_amounts"],
+        "monthly_reset_day": settings["reset_day"],
+        "monthly_reset_time": settings["reset_time"],
+        "timezone": "America/Phoenix",
+    }
 
 
 def _clean_strings(values: Any) -> list[str]:

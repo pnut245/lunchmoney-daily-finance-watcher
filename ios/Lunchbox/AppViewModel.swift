@@ -31,6 +31,10 @@ final class AppViewModel: ObservableObject {
     }
 
     func refresh() async {
+        guard !isRefreshing else {
+            return
+        }
+
         saveURL()
         guard let url = SnapshotStore.configuredURL else {
             errorText = SnapshotError.invalidURL.localizedDescription
@@ -39,6 +43,7 @@ final class AppViewModel: ObservableObject {
         }
 
         isRefreshing = true
+        errorText = nil
         defer { isRefreshing = false }
 
         do {

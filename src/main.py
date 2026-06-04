@@ -264,6 +264,10 @@ def main() -> int:
             print(f"One Number Today state written to {path}")
         for path in outputs["widget_paths"]:
             print(f"Widget snapshot written to {path}")
+        for path in outputs["settings_paths"]:
+            print(f"Settings JSON written to {path}")
+        for path in outputs["ledger_paths"]:
+            print(f"Ledger JSON written to {path}")
     elif args.command == "one-number-close-month":
         entry = one_number.close_month(args.db_path, budget_config, args.date)
         print(

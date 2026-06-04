@@ -2,115 +2,103 @@ import Foundation
 
 struct LunchboxSnapshot: Codable, Equatable {
     let dailyAllowance: Double
-    let todayDiscretionarySpend: Double
+    let spentToday: Double
     let remainingToday: Double
     let isNegative: Bool
-    let lastUpdated: String
-    let todayLabel: String
-    let todayAmount: Double
-    let weekLabel: String
-    let weekAmount: Double
-    let dopamineLabel: String
-    let dopamineAmount: Double
-    let spendingState: String
-    let moneyObject: String
-    let vaultState: String
-    let warningAlarms: Int
-    let criticalAlarms: Int
+    let state: String
+    let updatedAt: String
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case dailyAllowance = "daily_allowance"
-        case todayDiscretionarySpend = "today_discretionary_spend"
+        case spentToday = "spent_today"
         case remainingToday = "remaining_today"
         case isNegative = "is_negative"
+        case state
+        case updatedAt = "updated_at"
+    }
+
+    private enum LegacyCodingKeys: String, CodingKey {
+        case todayDiscretionarySpend = "today_discretionary_spend"
         case lastUpdated = "last_updated"
-        case todayLabel = "today_label"
-        case todayAmount = "today_amount"
-        case weekLabel = "week_label"
-        case weekAmount = "week_amount"
-        case dopamineLabel = "dopamine_label"
-        case dopamineAmount = "dopamine_amount"
-        case spendingState = "spending_state"
-        case moneyObject = "money_object"
-        case vaultState = "vault_state"
-        case warningAlarms = "warning_alarms"
-        case criticalAlarms = "critical_alarms"
+    }
+
+    init(
+        dailyAllowance: Double,
+        spentToday: Double,
+        remainingToday: Double,
+        isNegative: Bool,
+        state: String,
+        updatedAt: String
+    ) {
+        self.dailyAllowance = dailyAllowance
+        self.spentToday = spentToday
+        self.remainingToday = remainingToday
+        self.isNegative = isNegative
+        self.state = state
+        self.updatedAt = updatedAt
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let legacyContainer = try decoder.container(keyedBy: LegacyCodingKeys.self)
+        let dailyAllowance = try container.decodeIfPresent(Double.self, forKey: .dailyAllowance) ?? 0
+        let spentToday = try container.decodeIfPresent(Double.self, forKey: .spentToday)
+            ?? legacyContainer.decodeIfPresent(Double.self, forKey: .todayDiscretionarySpend)
+            ?? 0
+        let remainingToday = try container.decodeIfPresent(Double.self, forKey: .remainingToday) ?? 0
+        let state = try container.decodeIfPresent(String.self, forKey: .state)
+            ?? (remainingToday < 0 ? "negative" : "positive")
+        let updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt)
+            ?? legacyContainer.decodeIfPresent(String.self, forKey: .lastUpdated)
+            ?? ""
+        let decodedIsNegative = try container.decodeIfPresent(Bool.self, forKey: .isNegative)
+        let isNegative = decodedIsNegative ?? (remainingToday < 0)
+
+        self.init(
+            dailyAllowance: dailyAllowance,
+            spentToday: spentToday,
+            remainingToday: remainingToday,
+            isNegative: isNegative,
+            state: state,
+            updatedAt: updatedAt
+        )
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(dailyAllowance, forKey: .dailyAllowance)
+        try container.encode(spentToday, forKey: .spentToday)
+        try container.encode(remainingToday, forKey: .remainingToday)
+        try container.encode(isNegative, forKey: .isNegative)
+        try container.encode(state, forKey: .state)
+        try container.encode(updatedAt, forKey: .updatedAt)
     }
 }
 
 extension LunchboxSnapshot {
     var displayNumber: String {
-        let rounded = Int(remainingToday.rounded())
-        return rounded.formatted()
+        Int(remainingToday.rounded()).formatted()
     }
 
     var updatedDate: Date? {
-        ISO8601DateFormatter().date(from: lastUpdated)
-    }
-
-    func emphasisAmount(_ emphasis: WidgetEmphasis) -> Double {
-        switch emphasis {
-        case .today:
-            return todayAmount
-        case .dopamine:
-            return dopamineAmount
-        case .week:
-            return weekAmount
-        }
-    }
-
-    func emphasisLabel(_ emphasis: WidgetEmphasis) -> String {
-        switch emphasis {
-        case .today:
-            return todayLabel
-        case .dopamine:
-            return dopamineLabel
-        case .week:
-            return weekLabel
-        }
+        ISO8601DateFormatter().date(from: updatedAt)
     }
 
     static let preview = LunchboxSnapshot(
         dailyAllowance: 55,
-        todayDiscretionarySpend: 18,
+        spentToday: 18,
         remainingToday: 37,
         isNegative: false,
-        lastUpdated: "2026-06-02T23:00:00Z",
-        todayLabel: "Today",
-        todayAmount: 37,
-        weekLabel: "Week",
-        weekAmount: 185,
-        dopamineLabel: "Dopamine",
-        dopamineAmount: 31,
-        spendingState: "OK",
-        moneyObject: "Dinner",
-        vaultState: "SAFE",
-        warningAlarms: 1,
-        criticalAlarms: 0
+        state: "positive",
+        updatedAt: "2026-06-02T23:00:00Z"
     )
 
     static let negativePreview = LunchboxSnapshot(
         dailyAllowance: 55,
-        todayDiscretionarySpend: 67,
+        spentToday: 67,
         remainingToday: -12,
         isNegative: true,
-        lastUpdated: "2026-06-02T23:00:00Z",
-        todayLabel: "Today",
-        todayAmount: -12,
-        weekLabel: "Week",
-        weekAmount: 0,
-        dopamineLabel: "Dopamine",
-        dopamineAmount: 0,
-        spendingState: "NEGATIVE",
-        moneyObject: "No Spend",
-        vaultState: "LOW",
-        warningAlarms: 0,
-        criticalAlarms: 2
+        state: "negative",
+        updatedAt: "2026-06-02T23:00:00Z"
     )
-}
-
-enum WidgetEmphasis: String, Codable, CaseIterable {
-    case today
-    case dopamine
-    case week
 }

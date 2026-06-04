@@ -6,20 +6,49 @@ The daily question is:
 
 > Can I spend this today?
 
-The daily experience is intentionally not a dashboard. It hides categories, reports, trends, account details, transaction lists, and other minutia from the main flow so the user can make one calm spending decision.
+## Two Experiences
+
+### Daily experience
+
+The daily experience is for iPhone widget, watch, and glanceable phone use.
+
+It should show only:
+
+- the remaining daily discretionary spend number
+
+It should not show:
+
+- charts
+- categories
+- settings
+- projections
+- week/month breakdowns
+- warning badges
+- dashboard panels
+
+### Portal experience
+
+The portal is where complexity is allowed to live.
+
+It can contain:
+
+- daily allowance selection
+- savings projections
+- excluded categories and keywords
+- reset settings
+- snapshot details
+- intentionally buried monthly ledger
 
 ## Product Shape
 
 - Daily Number: one oversized remaining amount.
-- Settings: daily allowance, exclusions, and reset configuration.
-- Vault: month-end results only.
-
-Settings and Vault are intentionally secondary. The daily screen should not invite inspection.
+- Portal: planning and setup.
+- Ledger: quiet historical record.
 
 ## V1 Scope
 
 - Daily allowance setting.
-- Excluded categories and payees.
+- Excluded keywords, categories, and payees.
 - Daily remaining amount calculation.
 - Hourly refresh-compatible JSON output.
 - Monthly ledger storage.
