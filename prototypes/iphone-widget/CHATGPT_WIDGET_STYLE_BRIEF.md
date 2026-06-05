@@ -1,6 +1,6 @@
-# Lunchbox Widget Style Brief
+# Syzygy Widget Style Brief
 
-Use this file as the style and creative-direction handoff for the `Lunchbox` finance widget prototype in this repo.
+Use this file as the style and creative-direction handoff for the `Syzygy` finance widget prototype in this repo.
 
 ## Goal
 
@@ -69,7 +69,7 @@ Related implementation files:
 - `/Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher/prototypes/iphone-widget/index.html`
 - `/Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher/prototypes/iphone-widget/styles.css`
 - `/Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher/prototypes/iphone-widget/script.js`
-- `/Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher/prototypes/iphone-widget/swiftui/LunchboxWidget.swift`
+- `/Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher/prototypes/iphone-widget/swiftui/SyzygyWidget.swift`
 
 ## Design prompts for ChatGPT
 

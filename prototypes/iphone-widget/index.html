@@ -3,28 +3,99 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>One Number Today</title>
+    <title>Syzygy</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="app-shell">
     <main id="app" class="app-root">
-      <section id="daily-view" class="daily-display" data-route-panel="daily">
+      <section id="daily-view" class="daily-display" data-route-panel="daily" hidden>
         <header class="daily-utility">
-          <a class="quiet-link" href="#/portal">Portal</a>
-          <span id="daily-updated" class="daily-updated">Updated</span>
+          <div class="daily-brand-block">
+            <span id="daily-eyebrow" class="daily-eyebrow">Safe to spend</span>
+            <span id="daily-accent-line" class="daily-accent-line" aria-hidden="true"></span>
+          </div>
+          <a class="portal-button" href="#/portal">Portal</a>
         </header>
-        <div id="daily-number" class="daily-number">55</div>
+        <div class="daily-hero">
+          <div class="daily-number-row">
+            <div id="daily-number" class="daily-number">55</div>
+          </div>
+          <div id="daily-object-art" class="daily-object-art" aria-hidden="true"></div>
+        </div>
+        <footer class="daily-footer">
+          <div class="daily-footer-copy">
+            <span id="daily-object-label" class="daily-object-label">Dinner</span>
+            <span id="daily-state-label" class="daily-state-label">Comfortable</span>
+          </div>
+          <div class="daily-status-row">
+            <span id="daily-status-pill" class="status-pill">Live</span>
+            <span id="daily-updated" class="daily-updated">Updated</span>
+          </div>
+        </footer>
       </section>
 
       <section id="portal-view" class="portal-page" data-route-panel="portal" hidden>
         <main class="portal-shell">
           <header class="portal-header">
-            <p class="eyebrow">One Number Today</p>
-            <h1>Choose the number you want to live with.</h1>
+            <p class="eyebrow">Syzygy Portal</p>
+            <h1>Control the number. Let the widget and lock screen display it.</h1>
             <p class="portal-intro">
-              This is the planning interface. Complexity lives here so the daily experience can stay calm.
+              This website is the backend control surface. The daily number itself belongs on the widget and lock screen, not here.
             </p>
+            <div class="portal-header-actions">
+              <a class="quiet-link" href="#outputs">Jump to outputs</a>
+              <a class="quiet-link" href="#/ledger">Monthly ledger</a>
+            </div>
           </header>
+
+          <section class="portal-overview">
+            <article class="overview-card overview-card-primary">
+              <p class="overview-label">Chosen daily number</p>
+              <strong id="overview-allowance" class="overview-amount">$55</strong>
+              <span class="overview-caption">This is the number the rest of the prototype protects.</span>
+            </article>
+            <article class="overview-card">
+              <p class="overview-label">Live number</p>
+              <strong id="overview-remaining" class="overview-value">$55</strong>
+              <span id="overview-status" class="overview-caption">Waiting for the latest local read.</span>
+            </article>
+            <article class="overview-card">
+              <p class="overview-label">Excluded items</p>
+              <strong id="overview-exclusions" class="overview-value">11</strong>
+              <span class="overview-caption">Bills, transfers, and non-daily money.</span>
+            </article>
+            <article class="overview-card">
+              <p class="overview-label">Reset cadence</p>
+              <strong id="overview-reset" class="overview-value">1 · 04:00</strong>
+              <span class="overview-caption">When the next month starts fresh.</span>
+            </article>
+          </section>
+
+          <section id="outputs" class="settings-panel output-preview-panel">
+            <div class="section-heading">
+              <h2>Display outputs</h2>
+              <p>These are the simple surfaces that should show the number after you set it here.</p>
+            </div>
+
+            <div class="output-preview-grid">
+              <article class="output-card output-card-widget">
+                <p class="output-label">Widget</p>
+                <div class="output-body">
+                  <div id="widget-preview-number" class="output-number">55</div>
+                  <div id="widget-preview-object" class="output-object-art" aria-hidden="true"></div>
+                </div>
+              </article>
+
+              <article class="output-card output-card-lockscreen">
+                <p class="output-label">Lock screen</p>
+                <div class="output-body output-body-lockscreen">
+                  <p id="lockscreen-preview-eyebrow" class="output-eyebrow">Safe to spend</p>
+                  <div id="lockscreen-preview-number" class="output-number">55</div>
+                  <div id="lockscreen-preview-object" class="output-object-art" aria-hidden="true"></div>
+                </div>
+              </article>
+            </div>
+          </section>
 
           <section class="settings-panel">
             <div class="section-heading">
@@ -76,7 +147,7 @@
 
           <section class="settings-panel">
             <div class="section-heading">
-              <h2>Snapshot status</h2>
+              <h2>Live read</h2>
               <p id="snapshot-status">Waiting for snapshot.</p>
             </div>
 
@@ -89,7 +160,7 @@
             <div class="portal-actions">
               <button id="save-settings" class="solid-button" type="button">Save portal settings</button>
               <button id="refresh-snapshot" class="outline-button" type="button">Refresh snapshot</button>
-              <a class="quiet-link" href="#/ledger">Monthly ledger</a>
+              <span id="save-state" class="save-state">Using saved local settings.</span>
             </div>
           </section>
         </main>

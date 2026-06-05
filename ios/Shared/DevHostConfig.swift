@@ -1,7 +1,7 @@
 import Foundation
 
 enum DevHostConfig {
-    static let currentLANIP = "192.168.0.217"
+    static let currentLANIP = "172.20.10.9"
     static let serverPort = 8422
 
     static var suggestedDeviceURLString: String {

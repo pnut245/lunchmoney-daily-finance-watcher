@@ -1,7 +1,7 @@
 import AppIntents
 
-struct LunchboxWidgetConfigurationIntent: WidgetConfigurationIntent {
-    static var title: LocalizedStringResource = "Lunchbox Budget"
+struct SyzygyWidgetConfigurationIntent: WidgetConfigurationIntent {
+    static var title: LocalizedStringResource = "Syzygy Budget"
     static var description = IntentDescription("Shows the ADHD-first daily budget snapshot.")
 
     @Parameter(title: "Emphasis", default: .today)

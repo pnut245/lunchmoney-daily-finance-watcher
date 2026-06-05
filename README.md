@@ -30,8 +30,8 @@ http://localhost:8421/prototypes/iphone-widget/
 
 The repo now includes a native SwiftUI app plus WidgetKit extension under `ios/` and a generated Xcode project:
 
-- `Lunchbox.xcodeproj`
-- `ios/Lunchbox/`
+- `Syzygy.xcodeproj`
+- `ios/Syzygy/`
 - `ios/OneNumberWidget/`
 - `ios/Shared/`
 
@@ -48,7 +48,7 @@ cd /Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher
 python3 -m http.server 8422
 ```
 
-Then open `Lunchbox.xcodeproj` in Xcode and run the `Lunchbox` scheme on an iPhone simulator.
+Then open `Syzygy.xcodeproj` in Xcode and run the `Syzygy` scheme on an iPhone simulator.
 The default in-app snapshot URL is:
 
 ```text
@@ -73,7 +73,7 @@ To refresh the baked-in suggested LAN URL after your Mac's IP changes:
 
 The app now declares local network usage and local ATS intent for private-network HTTP testing. On a real iPhone, expect a Local Network permission prompt the first time the app tries to reach your Mac.
 
-For Personal Team installs, the current native prototype avoids `App Groups` so signing is simpler. The app and widget do not share edited URL settings yet; the widget uses its own built-in default URL and the app stores its URL locally.
+The native prototype uses the shared app group `group.com.ief.syzygy` so the app and widget can share cached snapshot state and URL settings.
 
 This project uses Lunch Money API v2 by default because Lunch Money recommends new projects start there, while v1 remains public beta. v2 is still alpha, so all API calls are isolated in `src/lunchmoney_client.py`.
 

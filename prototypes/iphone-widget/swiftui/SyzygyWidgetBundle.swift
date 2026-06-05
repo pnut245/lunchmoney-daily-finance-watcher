@@ -2,8 +2,8 @@ import WidgetKit
 import SwiftUI
 
 @main
-struct LunchboxWidgetBundle: WidgetBundle {
+struct SyzygyWidgetBundle: WidgetBundle {
     var body: some Widget {
-        LunchboxWidget()
+        SyzygyWidget()
     }
 }

@@ -1,0 +1,500 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CEDF2DB9F0961AF870DC830 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8735E2F845AB6E8FB243F428 /* AppViewModel.swift */; };
+		13D72DD08A2D0CD5973ACC8C /* SyzygySnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793E8672135E9B27E2B04E2 /* SyzygySnapshot.swift */; };
+		3157C857313CB928AF212B09 /* SyzygyVisuals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3523D05BD6D2AAB09750EA /* SyzygyVisuals.swift */; };
+		4F83928875C437EE33C67362 /* OneNumberWidgetIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DDF8772F06ACE3AE356A9 /* OneNumberWidgetIntent.swift */; };
+		52DBCE44E6C20C8C140615E0 /* SnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53F09CADBD954BDFFE84AB /* SnapshotStore.swift */; };
+		6AE7EEDE7FC55FC1BA98079E /* DevHostConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA046005E7869411F03D82F /* DevHostConfig.swift */; };
+		6C67E5E60777DB3E52AF95A2 /* SnapshotFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8B931D4B6FC48D3E06653 /* SnapshotFetcher.swift */; };
+		6CCA1EA8CC0C51F6A4A34462 /* OneNumberWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D3D9E534308C8C6752C87 /* OneNumberWidgetBundle.swift */; };
+		7AF97E92F1FBA065FE377D7B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45142753647C7199252953E /* ContentView.swift */; };
+		9295DEC9E6270E1571CE9741 /* SyzygyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD83788FB18F0C39AFEE7DF1 /* SyzygyApp.swift */; };
+		A3DBA7F9A905C2EBC70A9A1D /* SyzygyVisuals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3523D05BD6D2AAB09750EA /* SyzygyVisuals.swift */; };
+		B42241A41F8A80E628792D95 /* OneNumberWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ACD283FEAB7E941822D12EA0 /* OneNumberWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BF21062F40CDB7BAE51CFC56 /* DevHostConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA046005E7869411F03D82F /* DevHostConfig.swift */; };
+		BF388A655F0A049E64899AB1 /* SnapshotFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8B931D4B6FC48D3E06653 /* SnapshotFetcher.swift */; };
+		C7DE752905D99E425CE11F97 /* OneNumberWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326EA2335645903C7CE0C1AE /* OneNumberWidget.swift */; };
+		E90C098E14B15087B3BB40C6 /* SnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB53F09CADBD954BDFFE84AB /* SnapshotStore.swift */; };
+		FB5488A809316B46C74534F7 /* SyzygySnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793E8672135E9B27E2B04E2 /* SyzygySnapshot.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B32941DF352471DD85687685 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08A4A80ABDF55AB78CD68F72 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4BE333104054993908753B94;
+			remoteInfo = OneNumberWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6B0D14F31A4BD4B0AB147989 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B42241A41F8A80E628792D95 /* OneNumberWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		07C341D33A5A3C4423A73372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0C5DDF8772F06ACE3AE356A9 /* OneNumberWidgetIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneNumberWidgetIntent.swift; sourceTree = "<group>"; };
+		326EA2335645903C7CE0C1AE /* OneNumberWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneNumberWidget.swift; sourceTree = "<group>"; };
+		377D3D9E534308C8C6752C87 /* OneNumberWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneNumberWidgetBundle.swift; sourceTree = "<group>"; };
+		4D3523D05BD6D2AAB09750EA /* SyzygyVisuals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyzygyVisuals.swift; sourceTree = "<group>"; };
+		5439F50E64EDEB4BB67EB19B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		66B8B931D4B6FC48D3E06653 /* SnapshotFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotFetcher.swift; sourceTree = "<group>"; };
+		8735E2F845AB6E8FB243F428 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		ACD283FEAB7E941822D12EA0 /* OneNumberWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = OneNumberWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEA046005E7869411F03D82F /* DevHostConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevHostConfig.swift; sourceTree = "<group>"; };
+		BB53F09CADBD954BDFFE84AB /* SnapshotStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotStore.swift; sourceTree = "<group>"; };
+		BF7C63867465427E8B65A31F /* Syzygy.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Syzygy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D793E8672135E9B27E2B04E2 /* SyzygySnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyzygySnapshot.swift; sourceTree = "<group>"; };
+		DAFFB48CDA68D8DD92C11FDB /* OneNumberWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneNumberWidget.entitlements; sourceTree = "<group>"; };
+		DF31FE7B3AC16A8D8260F03A /* Syzygy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Syzygy.entitlements; sourceTree = "<group>"; };
+		E45142753647C7199252953E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FD83788FB18F0C39AFEE7DF1 /* SyzygyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyzygyApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		3E53A178B0A4C28D77466008 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ACD283FEAB7E941822D12EA0 /* OneNumberWidget.appex */,
+				BF7C63867465427E8B65A31F /* Syzygy.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		674040A6148760F59CB641BD /* OneNumberWidget */ = {
+			isa = PBXGroup;
+			children = (
+				5439F50E64EDEB4BB67EB19B /* Info.plist */,
+				DAFFB48CDA68D8DD92C11FDB /* OneNumberWidget.entitlements */,
+				326EA2335645903C7CE0C1AE /* OneNumberWidget.swift */,
+				377D3D9E534308C8C6752C87 /* OneNumberWidgetBundle.swift */,
+				0C5DDF8772F06ACE3AE356A9 /* OneNumberWidgetIntent.swift */,
+			);
+			name = OneNumberWidget;
+			path = ios/OneNumberWidget;
+			sourceTree = "<group>";
+		};
+		9EB707F67685761B8E5A4E18 = {
+			isa = PBXGroup;
+			children = (
+				674040A6148760F59CB641BD /* OneNumberWidget */,
+				C3B754B484961172753ECBA2 /* Shared */,
+				DEA41F5DB722AE8C332A60CF /* Syzygy */,
+				3E53A178B0A4C28D77466008 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C3B754B484961172753ECBA2 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				AEA046005E7869411F03D82F /* DevHostConfig.swift */,
+				66B8B931D4B6FC48D3E06653 /* SnapshotFetcher.swift */,
+				BB53F09CADBD954BDFFE84AB /* SnapshotStore.swift */,
+				D793E8672135E9B27E2B04E2 /* SyzygySnapshot.swift */,
+				4D3523D05BD6D2AAB09750EA /* SyzygyVisuals.swift */,
+			);
+			name = Shared;
+			path = ios/Shared;
+			sourceTree = "<group>";
+		};
+		DEA41F5DB722AE8C332A60CF /* Syzygy */ = {
+			isa = PBXGroup;
+			children = (
+				8735E2F845AB6E8FB243F428 /* AppViewModel.swift */,
+				E45142753647C7199252953E /* ContentView.swift */,
+				07C341D33A5A3C4423A73372 /* Info.plist */,
+				DF31FE7B3AC16A8D8260F03A /* Syzygy.entitlements */,
+				FD83788FB18F0C39AFEE7DF1 /* SyzygyApp.swift */,
+			);
+			name = Syzygy;
+			path = ios/Syzygy;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4BE333104054993908753B94 /* OneNumberWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79D716E84139BA80F2F4C87C /* Build configuration list for PBXNativeTarget "OneNumberWidget" */;
+			buildPhases = (
+				A289F9B91980EDB4D5C01F5A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneNumberWidget;
+			packageProductDependencies = (
+			);
+			productName = OneNumberWidget;
+			productReference = ACD283FEAB7E941822D12EA0 /* OneNumberWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		DFE24B6FF77C69839F3E1BBC /* Syzygy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B7737D4959FF044FE2BE514 /* Build configuration list for PBXNativeTarget "Syzygy" */;
+			buildPhases = (
+				77FFD41E24156A649BF297CC /* Sources */,
+				6B0D14F31A4BD4B0AB147989 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				801D250B1BEDE79C32EBA54A /* PBXTargetDependency */,
+			);
+			name = Syzygy;
+			packageProductDependencies = (
+			);
+			productName = Syzygy;
+			productReference = BF7C63867465427E8B65A31F /* Syzygy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08A4A80ABDF55AB78CD68F72 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					4BE333104054993908753B94 = {
+						DevelopmentTeam = 3MXW2FU446;
+						ProvisioningStyle = Automatic;
+					};
+					DFE24B6FF77C69839F3E1BBC = {
+						DevelopmentTeam = 3MXW2FU446;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 093E79BC37F4961A7A79D7B0 /* Build configuration list for PBXProject "Syzygy" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 9EB707F67685761B8E5A4E18;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 3E53A178B0A4C28D77466008 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4BE333104054993908753B94 /* OneNumberWidget */,
+				DFE24B6FF77C69839F3E1BBC /* Syzygy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		77FFD41E24156A649BF297CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CEDF2DB9F0961AF870DC830 /* AppViewModel.swift in Sources */,
+				7AF97E92F1FBA065FE377D7B /* ContentView.swift in Sources */,
+				6AE7EEDE7FC55FC1BA98079E /* DevHostConfig.swift in Sources */,
+				BF388A655F0A049E64899AB1 /* SnapshotFetcher.swift in Sources */,
+				E90C098E14B15087B3BB40C6 /* SnapshotStore.swift in Sources */,
+				9295DEC9E6270E1571CE9741 /* SyzygyApp.swift in Sources */,
+				13D72DD08A2D0CD5973ACC8C /* SyzygySnapshot.swift in Sources */,
+				A3DBA7F9A905C2EBC70A9A1D /* SyzygyVisuals.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A289F9B91980EDB4D5C01F5A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF21062F40CDB7BAE51CFC56 /* DevHostConfig.swift in Sources */,
+				C7DE752905D99E425CE11F97 /* OneNumberWidget.swift in Sources */,
+				6CCA1EA8CC0C51F6A4A34462 /* OneNumberWidgetBundle.swift in Sources */,
+				4F83928875C437EE33C67362 /* OneNumberWidgetIntent.swift in Sources */,
+				6C67E5E60777DB3E52AF95A2 /* SnapshotFetcher.swift in Sources */,
+				52DBCE44E6C20C8C140615E0 /* SnapshotStore.swift in Sources */,
+				FB5488A809316B46C74534F7 /* SyzygySnapshot.swift in Sources */,
+				3157C857313CB928AF212B09 /* SyzygyVisuals.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		801D250B1BEDE79C32EBA54A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4BE333104054993908753B94 /* OneNumberWidget */;
+			targetProxy = B32941DF352471DD85687685 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5C82CDE2D7FEB113419F840A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3MXW2FU446;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 0.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5E71AC98EBAA1CD3B85FF636 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3MXW2FU446;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ios/OneNumberWidget/Info.plist;
+				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
+				INFOPLIST_KEY_UIBackgroundModes = (
+					fetch,
+				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrickfoley.Syzygy.onenumberwidget;
+				PRODUCT_NAME = OneNumberWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		62A10076E76E54B690868901 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3MXW2FU446;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ios/OneNumberWidget/Info.plist;
+				INFOPLIST_KEY_LSRequiresIPhoneOS = YES;
+				INFOPLIST_KEY_UIBackgroundModes = (
+					fetch,
+				);
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrickfoley.Syzygy.onenumberwidget;
+				PRODUCT_NAME = OneNumberWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7EF3749D44231B9CD9E09B61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3MXW2FU446;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ios/Syzygy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrickfoley.Syzygy;
+				PRODUCT_NAME = Syzygy;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8449D4B1EBD972BF942C090A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3MXW2FU446;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 0.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		B56E14466BEC479DEB009073 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3MXW2FU446;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ios/Syzygy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrickfoley.Syzygy;
+				PRODUCT_NAME = Syzygy;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		093E79BC37F4961A7A79D7B0 /* Build configuration list for PBXProject "Syzygy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C82CDE2D7FEB113419F840A /* Debug */,
+				8449D4B1EBD972BF942C090A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5B7737D4959FF044FE2BE514 /* Build configuration list for PBXNativeTarget "Syzygy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EF3749D44231B9CD9E09B61 /* Debug */,
+				B56E14466BEC479DEB009073 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		79D716E84139BA80F2F4C87C /* Build configuration list for PBXNativeTarget "OneNumberWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				62A10076E76E54B690868901 /* Debug */,
+				5E71AC98EBAA1CD3B85FF636 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08A4A80ABDF55AB78CD68F72 /* Project object */;
+}

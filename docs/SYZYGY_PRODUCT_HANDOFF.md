@@ -1,4 +1,4 @@
-# Lunchbox Product Handoff
+# Syzygy Product Handoff
 
 This document is the shortest useful handoff for a new ChatGPT thread to take the lead on product polish.
 
@@ -15,11 +15,11 @@ This document is the shortest useful handoff for a new ChatGPT thread to take th
 
 These are the files that matter most for product cleanup:
 
-- `ios/Lunchbox/ContentView.swift`
-- `ios/Lunchbox/AppViewModel.swift`
-- `ios/OneNumberWidget/LunchboxWidget.swift`
-- `ios/OneNumberWidget/LunchboxWidgetIntent.swift`
-- `ios/Shared/LunchboxSnapshot.swift`
+- `ios/Syzygy/ContentView.swift`
+- `ios/Syzygy/AppViewModel.swift`
+- `ios/OneNumberWidget/OneNumberWidget.swift`
+- `ios/OneNumberWidget/OneNumberWidgetIntent.swift`
+- `ios/Shared/SyzygySnapshot.swift`
 - `ios/Shared/SnapshotFetcher.swift`
 - `ios/Shared/SnapshotStore.swift`
 - `docs/PRODUCT.md`
@@ -67,7 +67,7 @@ The number should dominate. Everything else should justify its existence.
 
 ## What Is Already Decided
 
-- The app/project name is `Lunchbox`.
+- The app/project name is `Syzygy`.
 - The widget target is `OneNumberWidget`.
 - The app is for real personal finance data, not mocked demo data.
 - The system should feel “live-ish,” with hourly source updates.
@@ -151,10 +151,10 @@ Best stance:
 Use this in a new ChatGPT thread:
 
 ```text
-I want you to take the lead on product polish for my iPhone prototype called Lunchbox.
+I want you to take the lead on product polish for my iPhone prototype called Syzygy.
 
 Please use this repo handoff doc as the source of truth:
-/Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher/docs/LUNCHBOX_PRODUCT_HANDOFF.md
+/Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher/docs/SYZYGY_PRODUCT_HANDOFF.md
 
 Important context:
 - the native prototype is already working on a real iPhone
@@ -174,7 +174,7 @@ I do not want a dashboard.
 I want a calm, intentional one-number product.
 
 Please start by reading:
-- /Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher/docs/LUNCHBOX_PRODUCT_HANDOFF.md
+- /Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher/docs/SYZYGY_PRODUCT_HANDOFF.md
 - /Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher/docs/PRODUCT.md
 - /Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher/docs/DESIGN.md
 - /Users/patrickfoley/Documents/Playground/lunchmoney-daily-finance-watcher/docs/V1_IMPLEMENTATION.md

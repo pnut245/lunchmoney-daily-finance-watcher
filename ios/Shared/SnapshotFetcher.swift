@@ -1,7 +1,7 @@
 import Foundation
 
 enum SnapshotFetcher {
-    static func fetch(from url: URL) async throws -> LunchboxSnapshot {
+    static func fetch(from url: URL) async throws -> SyzygySnapshot {
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 8)
         let config = URLSessionConfiguration.ephemeral
         config.waitsForConnectivity = false
@@ -12,7 +12,7 @@ enum SnapshotFetcher {
         guard let http = response as? HTTPURLResponse, (200 ... 299).contains(http.statusCode) else {
             throw SnapshotError.invalidResponse
         }
-        return try JSONDecoder().decode(LunchboxSnapshot.self, from: data)
+        return try JSONDecoder().decode(SyzygySnapshot.self, from: data)
     }
 }
 

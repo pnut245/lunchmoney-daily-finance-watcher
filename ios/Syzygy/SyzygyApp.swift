@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct LunchboxMainApp: App {
+struct SyzygyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

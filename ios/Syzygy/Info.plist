@@ -49,7 +49,7 @@
 		</dict>
 	</dict>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Lunchbox fetches the hourly budget snapshot from your Mac on the local network.</string>
+	<string>Syzygy fetches the hourly budget snapshot from your Mac on the local network.</string>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UISupportedInterfaceOrientations</key>

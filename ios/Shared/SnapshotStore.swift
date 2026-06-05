@@ -1,12 +1,13 @@
 import Foundation
 
 enum SnapshotStore {
+    static let appGroup = "group.com.ief.syzygy"
     static let snapshotURLKey = "snapshot_url"
     static let cachedSnapshotKey = "cached_snapshot_json"
     static let lastErrorKey = "last_snapshot_error"
 
     static var defaults: UserDefaults {
-        .standard
+        UserDefaults(suiteName: appGroup) ?? .standard
     }
 
     static var configuredURLString: String {
@@ -34,14 +35,14 @@ enum SnapshotStore {
         URL(string: configuredURLString.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
-    static func loadCachedSnapshot() -> LunchboxSnapshot? {
+    static func loadCachedSnapshot() -> SyzygySnapshot? {
         guard let data = defaults.data(forKey: cachedSnapshotKey) else {
             return nil
         }
-        return try? JSONDecoder().decode(LunchboxSnapshot.self, from: data)
+        return try? JSONDecoder().decode(SyzygySnapshot.self, from: data)
     }
 
-    static func cache(snapshot: LunchboxSnapshot) {
+    static func cache(snapshot: SyzygySnapshot) {
         guard let data = try? JSONEncoder().encode(snapshot) else {
             return
         }
@@ -54,6 +55,10 @@ enum SnapshotStore {
     }
 
     static func loadError() -> String? {
-        defaults.string(forKey: lastErrorKey)
+        let value = defaults.string(forKey: lastErrorKey)
+        if let value, value.isEmpty {
+            return nil
+        }
+        return value
     }
 }

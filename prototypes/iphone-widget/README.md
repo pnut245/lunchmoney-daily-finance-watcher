@@ -35,7 +35,7 @@ The prototype auto-refreshes the daily snapshot every minute so you can leave it
 
 The active native app + widget implementation now lives under:
 
-- `/ios/Lunchbox/`
+- `/ios/Syzygy/`
 - `/ios/OneNumberWidget/`
 - `/ios/Shared/`
-- `/Lunchbox.xcodeproj`
+- `/Syzygy.xcodeproj`

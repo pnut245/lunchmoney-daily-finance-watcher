@@ -20,8 +20,8 @@ The daily prototype is no longer a dashboard. It has three primary screens:
 - `prototypes/iphone-widget/index.html`
 - `prototypes/iphone-widget/script.js`
 - `prototypes/iphone-widget/styles.css`
-- `prototypes/iphone-widget/swiftui/LunchboxWidget.swift`
-- `prototypes/iphone-widget/swiftui/LunchboxWidgetModels.swift`
+- `prototypes/iphone-widget/swiftui/SyzygyWidget.swift`
+- `prototypes/iphone-widget/swiftui/SyzygyWidgetModels.swift`
 - `tests/test_one_number.py`
 - `docs/PRODUCT.md`
 - `docs/DESIGN.md`

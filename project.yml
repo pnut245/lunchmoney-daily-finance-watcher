@@ -1,31 +1,31 @@
-name: Lunchbox
+name: Syzygy
 options:
   bundleIdPrefix: com.patrickfoley
   deploymentTarget:
     iOS: "18.0"
 settings:
   base:
-    DEVELOPMENT_TEAM: 44LJQT9WG3
+    DEVELOPMENT_TEAM: 3MXW2FU446
     SWIFT_VERSION: 5.0
     GENERATE_INFOPLIST_FILE: YES
     CURRENT_PROJECT_VERSION: 1
     MARKETING_VERSION: 0.1
 targets:
-  Lunchbox:
+  Syzygy:
     type: application
     platform: iOS
     sources:
-      - path: ios/Lunchbox
+      - path: ios/Syzygy
       - path: ios/Shared
     settings:
       base:
-        DEVELOPMENT_TEAM: 44LJQT9WG3
+        DEVELOPMENT_TEAM: 3MXW2FU446
         CODE_SIGN_STYLE: Automatic
-        PRODUCT_BUNDLE_IDENTIFIER: com.patrickfoley.Lunchbox
-        PRODUCT_NAME: Lunchbox
+        PRODUCT_BUNDLE_IDENTIFIER: com.patrickfoley.Syzygy
+        PRODUCT_NAME: Syzygy
         TARGETED_DEVICE_FAMILY: "1,2"
         GENERATE_INFOPLIST_FILE: NO
-        INFOPLIST_FILE: ios/Lunchbox/Info.plist
+        INFOPLIST_FILE: ios/Syzygy/Info.plist
     dependencies:
       - target: OneNumberWidget
         embed: true
@@ -37,9 +37,9 @@ targets:
       - path: ios/Shared
     settings:
       base:
-        DEVELOPMENT_TEAM: 44LJQT9WG3
+        DEVELOPMENT_TEAM: 3MXW2FU446
         CODE_SIGN_STYLE: Automatic
-        PRODUCT_BUNDLE_IDENTIFIER: com.patrickfoley.Lunchbox.onenumberwidget
+        PRODUCT_BUNDLE_IDENTIFIER: com.patrickfoley.Syzygy.onenumberwidget
         PRODUCT_NAME: OneNumberWidget
         SKIP_INSTALL: YES
         GENERATE_INFOPLIST_FILE: NO

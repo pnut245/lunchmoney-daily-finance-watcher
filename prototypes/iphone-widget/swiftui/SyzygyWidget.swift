@@ -2,29 +2,29 @@ import AppIntents
 import SwiftUI
 import WidgetKit
 
-struct LunchboxWidgetEntry: TimelineEntry {
+struct SyzygyWidgetEntry: TimelineEntry {
     let date: Date
-    let snapshot: LunchboxWidgetSnapshot
-    let configuration: LunchboxWidgetConfigurationIntent
+    let snapshot: SyzygyWidgetSnapshot
+    let configuration: SyzygyWidgetConfigurationIntent
 }
 
-struct LunchboxWidgetProvider: AppIntentTimelineProvider {
-    func placeholder(in context: Context) -> LunchboxWidgetEntry {
-        LunchboxWidgetEntry(date: .now, snapshot: .preview, configuration: .init())
+struct SyzygyWidgetProvider: AppIntentTimelineProvider {
+    func placeholder(in context: Context) -> SyzygyWidgetEntry {
+        SyzygyWidgetEntry(date: .now, snapshot: .preview, configuration: .init())
     }
 
-    func snapshot(for configuration: LunchboxWidgetConfigurationIntent, in context: Context) async -> LunchboxWidgetEntry {
-        LunchboxWidgetEntry(date: .now, snapshot: .preview, configuration: configuration)
+    func snapshot(for configuration: SyzygyWidgetConfigurationIntent, in context: Context) async -> SyzygyWidgetEntry {
+        SyzygyWidgetEntry(date: .now, snapshot: .preview, configuration: configuration)
     }
 
-    func timeline(for configuration: LunchboxWidgetConfigurationIntent, in context: Context) async -> Timeline<LunchboxWidgetEntry> {
-        let entry = LunchboxWidgetEntry(date: .now, snapshot: .preview, configuration: configuration)
+    func timeline(for configuration: SyzygyWidgetConfigurationIntent, in context: Context) async -> Timeline<SyzygyWidgetEntry> {
+        let entry = SyzygyWidgetEntry(date: .now, snapshot: .preview, configuration: configuration)
         return Timeline(entries: [entry], policy: .after(.now.addingTimeInterval(60 * 60)))
     }
 }
 
-struct LunchboxWidgetView: View {
-    let entry: LunchboxWidgetProvider.Entry
+struct SyzygyWidgetView: View {
+    let entry: SyzygyWidgetProvider.Entry
     @Environment(\.widgetFamily) private var family
 
     var body: some View {
@@ -120,16 +120,16 @@ struct LunchboxWidgetView: View {
     }
 }
 
-struct LunchboxWidget: Widget {
-    let kind = "LunchboxWidget"
+struct SyzygyWidget: Widget {
+    let kind = "SyzygyWidget"
 
     var body: some WidgetConfiguration {
         AppIntentConfiguration(
             kind: kind,
-            intent: LunchboxWidgetConfigurationIntent.self,
-            provider: LunchboxWidgetProvider()
+            intent: SyzygyWidgetConfigurationIntent.self,
+            provider: SyzygyWidgetProvider()
         ) { entry in
-            LunchboxWidgetView(entry: entry)
+            SyzygyWidgetView(entry: entry)
         }
         .configurationDisplayName("One Number Today")
         .description("One daily number for spending decisions.")
@@ -138,13 +138,13 @@ struct LunchboxWidget: Widget {
 }
 
 #Preview(as: .systemSmall) {
-    LunchboxWidget()
+    SyzygyWidget()
 } timeline: {
-    LunchboxWidgetEntry(date: .now, snapshot: .preview, configuration: .init())
+    SyzygyWidgetEntry(date: .now, snapshot: .preview, configuration: .init())
 }
 
 #Preview(as: .systemSmall) {
-    LunchboxWidget()
+    SyzygyWidget()
 } timeline: {
-    LunchboxWidgetEntry(date: .now, snapshot: .negativePreview, configuration: .init())
+    SyzygyWidgetEntry(date: .now, snapshot: .negativePreview, configuration: .init())
 }

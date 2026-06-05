@@ -162,6 +162,8 @@ def build_widget_snapshot_payload(payload: dict[str, Any]) -> dict[str, Any]:
         "remaining_today": remaining_today,
         "is_negative": bool(payload.get("is_negative", remaining_today < 0)),
         "state": payload.get("state", "positive"),
+        "spending_state": payload.get("spending_state", "NEGATIVE" if remaining_today < 0 else "OK"),
+        "money_object": payload.get("money_object", _money_object_for_amount(remaining_today)),
         "last_updated": payload.get("last_updated"),
         "updated_at": payload.get("updated_at", payload.get("last_updated")),
     }

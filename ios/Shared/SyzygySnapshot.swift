@@ -1,11 +1,13 @@
 import Foundation
 
-struct LunchboxSnapshot: Codable, Equatable {
+struct SyzygySnapshot: Codable, Equatable {
     let dailyAllowance: Double
     let spentToday: Double
     let remainingToday: Double
     let isNegative: Bool
     let state: String
+    let spendingState: String
+    let moneyObject: String
     let updatedAt: String
 
     private enum CodingKeys: String, CodingKey {
@@ -14,6 +16,8 @@ struct LunchboxSnapshot: Codable, Equatable {
         case remainingToday = "remaining_today"
         case isNegative = "is_negative"
         case state
+        case spendingState = "spending_state"
+        case moneyObject = "money_object"
         case updatedAt = "updated_at"
     }
 
@@ -28,6 +32,8 @@ struct LunchboxSnapshot: Codable, Equatable {
         remainingToday: Double,
         isNegative: Bool,
         state: String,
+        spendingState: String,
+        moneyObject: String,
         updatedAt: String
     ) {
         self.dailyAllowance = dailyAllowance
@@ -35,6 +41,8 @@ struct LunchboxSnapshot: Codable, Equatable {
         self.remainingToday = remainingToday
         self.isNegative = isNegative
         self.state = state
+        self.spendingState = spendingState
+        self.moneyObject = moneyObject
         self.updatedAt = updatedAt
     }
 
@@ -48,6 +56,10 @@ struct LunchboxSnapshot: Codable, Equatable {
         let remainingToday = try container.decodeIfPresent(Double.self, forKey: .remainingToday) ?? 0
         let state = try container.decodeIfPresent(String.self, forKey: .state)
             ?? (remainingToday < 0 ? "negative" : "positive")
+        let spendingState = try container.decodeIfPresent(String.self, forKey: .spendingState)
+            ?? (remainingToday < 0 ? "OVERDRAWN" : "OK")
+        let moneyObject = try container.decodeIfPresent(String.self, forKey: .moneyObject)
+            ?? "Dinner"
         let updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt)
             ?? legacyContainer.decodeIfPresent(String.self, forKey: .lastUpdated)
             ?? ""
@@ -60,6 +72,8 @@ struct LunchboxSnapshot: Codable, Equatable {
             remainingToday: remainingToday,
             isNegative: isNegative,
             state: state,
+            spendingState: spendingState,
+            moneyObject: moneyObject,
             updatedAt: updatedAt
         )
     }
@@ -71,34 +85,73 @@ struct LunchboxSnapshot: Codable, Equatable {
         try container.encode(remainingToday, forKey: .remainingToday)
         try container.encode(isNegative, forKey: .isNegative)
         try container.encode(state, forKey: .state)
+        try container.encode(spendingState, forKey: .spendingState)
+        try container.encode(moneyObject, forKey: .moneyObject)
         try container.encode(updatedAt, forKey: .updatedAt)
     }
 }
 
-extension LunchboxSnapshot {
+extension SyzygySnapshot {
+    enum Freshness {
+        case fresh
+        case aging
+        case stale
+        case unknown
+    }
+
     var displayNumber: String {
         Int(remainingToday.rounded()).formatted()
+    }
+
+    var currencyNumber: String {
+        "$\(displayNumber)"
+    }
+
+    var spentTodayText: String {
+        "$\(Int(spentToday.rounded()).formatted())"
+    }
+
+    var dailyAllowanceText: String {
+        "$\(Int(dailyAllowance.rounded()).formatted())"
     }
 
     var updatedDate: Date? {
         ISO8601DateFormatter().date(from: updatedAt)
     }
 
-    static let preview = LunchboxSnapshot(
+    var freshness: Freshness {
+        guard let updatedDate else {
+            return .unknown
+        }
+        let age = Date().timeIntervalSince(updatedDate)
+        if age <= 90 * 60 {
+            return .fresh
+        }
+        if age <= 6 * 60 * 60 {
+            return .aging
+        }
+        return .stale
+    }
+
+    static let preview = SyzygySnapshot(
         dailyAllowance: 55,
         spentToday: 18,
         remainingToday: 37,
         isNegative: false,
         state: "positive",
+        spendingState: "COMFORTABLE",
+        moneyObject: "Dinner",
         updatedAt: "2026-06-02T23:00:00Z"
     )
 
-    static let negativePreview = LunchboxSnapshot(
+    static let negativePreview = SyzygySnapshot(
         dailyAllowance: 55,
         spentToday: 67,
         remainingToday: -12,
         isNegative: true,
         state: "negative",
+        spendingState: "OVERDRAWN",
+        moneyObject: "No Spend",
         updatedAt: "2026-06-02T23:00:00Z"
     )
 }
